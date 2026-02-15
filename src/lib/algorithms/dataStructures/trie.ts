@@ -139,8 +139,8 @@ export const trie: AlgorithmInfo = {
         conditionsEn: 'Characters a-z.',
         output: 'Cây Trie sau khi chèn.',
         outputEn: 'Trie structure after insertion.',
-        explanation: 'Minh họa thao tác chèn từng ký tự.',
-        explanationEn: 'Visualizes character-by-character insertion.'
+        explanation: 'Trie lưu mỗi ký tự trên một nút riêng biệt. Các từ có chung tiền tố (prefix) sẽ dùng chung đường dẫn trên cây. Ví dụ: "cat" và "car" dùng chung nhánh c→a. Chèn: đi theo từng ký tự, tạo nút mới nếu chưa có, đánh dấu kết thúc từ. Tìm kiếm theo prefix cực nhanh O(L) với L là độ dài từ. Ứng dụng: autocomplete, kiểm tra chính tả, từ điển.',
+        explanationEn: 'Trie stores each character on a separate node. Words sharing common prefixes share paths. E.g., "cat" and "car" share c→a branch. Insert: follow each char, create new node if missing, mark word end. Prefix search is O(L) where L is word length. Used in: autocomplete, spell check, dictionaries.'
     },
 
     generateSteps: () => { // Removed unused input parameter

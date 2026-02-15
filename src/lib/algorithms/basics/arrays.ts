@@ -97,8 +97,8 @@ export const arrays: AlgorithmInfo = {
         conditionsEn: 'Positive or negative integers.',
         output: 'Trạng thái mảng sau các thao tác truy cập, cập nhật, thêm và xóa.',
         outputEn: 'Array state after access, update, insert, and delete operations.',
-        explanation: 'Mô phỏng 4 thao tác cơ bản trên mảng.',
-        explanationEn: 'Simulates 4 basic operations on an array.'
+        explanation: 'Mảng lưu các phần tử liên tiếp trong bộ nhớ, mỗi phần tử có chỉ số (bắt đầu từ 0). Truy cập theo chỉ số rất nhanh O(1). Thêm/xóa cuối nhanh, nhưng thêm/xóa giữa chậm O(n) vì phải dịch các phần tử. Mảng là nền tảng của hầu hết cấu trúc dữ liệu khác.',
+        explanationEn: 'Arrays store elements contiguously in memory, each with an index (starting from 0). Access by index is O(1). Add/remove at end is fast, but in middle is O(n) due to shifting. Arrays are the foundation of most other data structures.'
     },
 
     generateSteps: (input: number[] = [10, 20, 30, 40, 50]) => {

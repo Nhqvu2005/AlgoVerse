@@ -118,12 +118,12 @@ export const hashTable: AlgorithmInfo = {
     guide: {
         input: 'Danh sách số nguyên.',
         inputEn: 'List of integers.',
-        conditions: 'Hàm băm: key % 7.',
-        conditionsEn: 'Hash Function: key % 7.',
+        conditions: 'Hàm băm: key % 7 (công thức đơn giản minh họa).',
+        conditionsEn: 'Hash Function: key % 7 (simplified for illustration).',
         output: 'Trạng thái bảng băm và xử lý va chạm.',
         outputEn: 'Hash table state and collision handling.',
-        explanation: 'Phương pháp chia (Division Method): h(k) = k mod m. Xử lý va chạm bằng phương pháp Xâu chuỗi (Chaining) - thêm vào danh sách tại bucket.',
-        explanationEn: 'Division Method: h(k) = k mod m. Collision handling via Chaining - appending to list at bucket.'
+        explanation: 'Ở đây sử dụng công thức đơn giản h(k) = k mod m (Phương pháp chia) để dễ hình dung. Thực tế còn nhiều hàm băm khác như: Phương pháp nhân (Multiplication), Băm phổ quát (Universal Hashing), SHA, MD5... Xử lý va chạm bằng Chaining (Xâu chuỗi).',
+        explanationEn: 'This demo uses a simple formula h(k) = k mod m (Division Method) for easy visualization. In practice, there are many other hash functions: Multiplication Method, Universal Hashing, SHA, MD5, etc. Collisions are resolved via Chaining.'
     },
 
     generateSteps: (input: number[] = [10, 20, 15, 7, 22]) => {

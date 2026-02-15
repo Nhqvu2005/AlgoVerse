@@ -84,8 +84,8 @@ export const loops: AlgorithmInfo = {
         conditionsEn: 'Counter i increases, count decreases.',
         output: 'Giá trị của biến trong từng bước lặp.',
         outputEn: 'Variable values at each iteration step.',
-        explanation: 'Mô phỏng For loop và While loop.',
-        explanationEn: 'Simulates For loop and While loop.'
+        explanation: 'Vòng lặp cho phép thực thi một đoạn mã nhiều lần. For loop: biết trước số lần lặp, dùng biến đếm (i=0, i<n, i++). While loop: lặp khi điều kiện còn đúng, không biết trước số lần. Cẩn thận: nếu điều kiện không bao giờ sai sẽ gây vòng lặp vô hạn. Vòng lặp là nền tảng của mọi thuật toán.',
+        explanationEn: 'Loops execute a block of code repeatedly. For loop: known iteration count, uses counter (i=0, i<n, i++). While loop: repeats while condition is true, unknown count. Caution: if condition never becomes false, infinite loop occurs. Loops are fundamental to all algorithms.'
     },
 
     generateSteps: () => {

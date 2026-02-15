@@ -98,8 +98,8 @@ export const avlTree: AlgorithmInfo = {
         conditionsEn: 'Causes RR imbalance.',
         output: 'Cây xoay trái để cân bằng.',
         outputEn: 'Tree rotates left to balance.',
-        explanation: 'Minh họa thao tác xoay đơn (Left Rotation).',
-        explanationEn: 'Illustrates single Left Rotation.'
+        explanation: 'Cây AVL là BST tự cân bằng: sau mỗi lần chèn/xóa, kiểm tra chênh lệch chiều cao hai cây con. Nếu chênh lệch > 1, thực hiện xoay (Rotation) để cân bằng lại. Có 4 trường hợp xoay: Left-Left, Right-Right, Left-Right, Right-Left. Nhờ vậy, tìm kiếm/chèn/xóa luôn O(log n), không bị suy biến thành O(n) như BST thông thường.',
+        explanationEn: 'AVL is a self-balancing BST: after each insert/delete, check height difference of subtrees. If difference > 1, perform rotations to rebalance. 4 rotation cases: LL, RR, LR, RL. This guarantees search/insert/delete always O(log n), avoiding O(n) worst case of regular BST.'
     },
 
     generateSteps: () => {

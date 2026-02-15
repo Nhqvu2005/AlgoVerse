@@ -104,8 +104,8 @@ export const dijkstra: AlgorithmInfo = {
         conditionsEn: 'Non-negative weights.',
         output: 'Khoảng cách ngắn nhất từ đỉnh bắt đầu đến các đỉnh khác.',
         outputEn: 'Shortest distances from start node to others.',
-        explanation: 'Sử dụng hàng đợi ưu tiên để tham lam chọn đỉnh gần nhất.',
-        explanationEn: 'Uses a priority queue to greedily select the closest node.'
+        explanation: 'Bắt đầu từ đỉnh nguồn (dist=0), các đỉnh khác dist=∞. Mỗi bước, chọn đỉnh có dist nhỏ nhất chưa xử lý (dùng Priority Queue). Kiểm tra tất cả cạnh nối từ đỉnh đó: nếu đi qua đỉnh hiện tại ngắn hơn dist cũ thì cập nhật. Lặp lại đến hết. Kết quả: đường đi ngắn nhất từ nguồn đến mọi đỉnh.',
+        explanationEn: 'Start from source (dist=0), all others dist=∞. Each step, pick the unprocessed node with smallest dist (using Priority Queue). Check all edges from it: if going through this node is shorter than old dist, update. Repeat until done. Result: shortest path from source to every node.'
     },
 
     generateSteps: (data?: GraphData) => {

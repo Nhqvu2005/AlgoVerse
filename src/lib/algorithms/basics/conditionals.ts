@@ -95,8 +95,8 @@ export const conditionals: AlgorithmInfo = {
         conditionsEn: '0 <= score <= 100.',
         output: 'Xếp loại A, B hoặc C.',
         outputEn: 'Grade A, B, or C.',
-        explanation: 'Phân loại điểm dựa trên các điều kiện If-Else.',
-        explanationEn: 'Categorizes score based on If-Else conditions.'
+        explanation: 'Câu lệnh điều kiện cho phép chương trình "ra quyết định". If: kiểm tra điều kiện, nếu đúng thì thực thi. Else if: kiểm tra điều kiện tiếp theo. Else: thực thi khi không có điều kiện nào đúng. Các điều kiện được kiểm tra tuần tự từ trên xuống, chỉ thực thi khối đầu tiên thỏa mãn. Đây là nền tảng logic của mọi chương trình.',
+        explanationEn: 'Conditionals let programs make decisions. If: check condition, execute if true. Else if: check next condition. Else: execute when no condition is true. Conditions are checked top-to-bottom, only the first matching block executes. This is the foundation of all program logic.'
     },
 
     generateSteps: (input: number[] = [75]) => {

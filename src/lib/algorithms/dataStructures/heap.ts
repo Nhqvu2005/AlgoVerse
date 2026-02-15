@@ -199,8 +199,8 @@ export const heap: AlgorithmInfo = {
         conditionsEn: 'Parent <= Child.',
         output: 'Trạng thái cây sau các thao tác.',
         outputEn: 'Tree state after operations.',
-        explanation: 'Min Heap duy trì phần tử nhỏ nhất ở gốc.',
-        explanationEn: 'Min Heap keeps the smallest element at the root.'
+        explanation: 'Min Heap là cây nhị phân đặc biệt: mỗi nút cha luôn ≤ các con. Phần tử nhỏ nhất luôn ở gốc → lấy min chỉ O(1). Khi chèn: thêm vào cuối rồi "nổi" lên (HeapifyUp) để duy trì tính chất. Khi lấy min: thay gốc bằng phần tử cuối rồi "chìm" xuống (HeapifyDown). Ứng dụng: Priority Queue, thuật toán Dijkstra, Heap Sort.',
+        explanationEn: 'Min Heap is a special binary tree: every parent ≤ its children. Smallest element is always at root → get min in O(1). Insert: add to end then "bubble up" (HeapifyUp). Extract min: replace root with last element then "sink down" (HeapifyDown). Used in: Priority Queue, Dijkstra, Heap Sort.'
     },
 
     generateSteps: () => {

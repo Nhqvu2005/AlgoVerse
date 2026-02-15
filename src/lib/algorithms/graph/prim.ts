@@ -121,8 +121,8 @@ export const prim: AlgorithmInfo = {
         conditionsEn: 'Connected graph.',
         output: 'Tập hợp các cạnh tạo thành MST.',
         outputEn: 'Set of edges forming the MST.',
-        explanation: 'Phát triển cây khung từ một đỉnh ban đầu bằng cách luôn chọn cạnh nhỏ nhất nối ra ngoài.',
-        explanationEn: 'Grows the MST from a start node by always choosing the smallest outgoing edge.'
+        explanation: 'Bắt đầu từ 1 đỉnh bất kỳ. Mỗi bước, nhìn tất cả cạnh nối từ các đỉnh đã chọn ra các đỉnh chưa chọn, rồi chọn cạnh có trọng số nhỏ nhất. Thêm đỉnh mới vào tập đã chọn. Lặp lại đến khi tất cả đỉnh được nối. Kết quả: cây khung (nối tất cả đỉnh) với tổng trọng số nhỏ nhất.',
+        explanationEn: 'Start from any node. Each step, look at all edges connecting selected nodes to unselected ones, pick the edge with smallest weight. Add the new node. Repeat until all nodes are connected. Result: a spanning tree (connecting all nodes) with minimum total weight.'
     },
 
     generateSteps: (data?: GraphData) => {
