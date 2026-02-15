@@ -2,13 +2,13 @@ import { AlgorithmInfo, AlgorithmStep, GraphData } from '../../types';
 
 const defaultGraph: GraphData = {
     nodes: [
-        { id: 0, label: '0', x: 200, y: 50 },
-        { id: 1, label: '1', x: 80, y: 150 },
-        { id: 2, label: '2', x: 320, y: 150 },
-        { id: 3, label: '3', x: 30, y: 280 },
-        { id: 4, label: '4', x: 150, y: 280 },
-        { id: 5, label: '5', x: 270, y: 280 },
-        { id: 6, label: '6', x: 380, y: 280 },
+        { id: 0, label: '0', x: 200, y: 30 },
+        { id: 1, label: '1', x: 100, y: 120 },
+        { id: 2, label: '2', x: 300, y: 120 },
+        { id: 3, label: '3', x: 50, y: 220 },
+        { id: 4, label: '4', x: 150, y: 220 },
+        { id: 5, label: '5', x: 250, y: 220 },
+        { id: 6, label: '6', x: 350, y: 220 },
     ],
     edges: [
         { from: 0, to: 1 }, { from: 0, to: 2 },
@@ -23,100 +23,151 @@ export const dfs: AlgorithmInfo = {
     nameVi: 'Tìm kiếm theo Chiều sâu',
     category: 'graph',
     categoryVi: 'Đồ thị',
-    description: 'Duyệt đồ thị theo chiều sâu, đi sâu nhất có thể trước khi quay lui (backtrack). Sử dụng ngăn xếp (Stack) hoặc đệ quy. Hữu ích cho phát hiện chu trình và tìm đường.',
-    descriptionEn: 'Traverses the graph by going as deep as possible before backtracking. Uses a Stack or recursion. Useful for cycle detection and pathfinding.',
+    description: 'Duyệt đồ thị bằng cách đi sâu nhất có thể trước khi quay lui. Sử dụng ngăn xếp (Stack) hoặc đệ quy để quản lý thứ tự duyệt.',
+    descriptionEn: 'Traverses a graph by going as deep as possible before backtracking. Uses a Stack or recursion to manage traversal order.',
     timeComplexity: { best: 'O(V + E)', average: 'O(V + E)', worst: 'O(V + E)' },
     spaceComplexity: 'O(V)',
     icon: '🏊',
-    code: `function DFS(graph, start) {
+    inputType: 'graph',
+    guide: {
+        input: 'Đồ thị gồm các đỉnh và cạnh, cùng đỉnh bắt đầu (mặc định đỉnh 0).',
+        inputEn: 'A graph with nodes and edges, and a starting node (default node 0).',
+        conditions: 'Đồ thị có thể có hướng hoặc vô hướng. Đỉnh bắt đầu phải tồn tại.',
+        conditionsEn: 'Graph can be directed or undirected. Starting node must exist.',
+        output: 'Thứ tự duyệt các đỉnh theo chiều sâu.',
+        outputEn: 'The order in which nodes are visited in depth-first order.',
+        explanation: 'DFS đặt đỉnh bắt đầu vào ngăn xếp. Lặp lại: lấy đỉnh đầu stack, đánh dấu đã thăm, đẩy các đỉnh kề chưa thăm vào stack. Kết quả: duyệt hết một nhánh trước khi quay lại (backtrack) và duyệt nhánh kế tiếp.',
+        explanationEn: 'DFS pushes the start node onto a stack. Repeat: pop the top node, mark as visited, push all unvisited neighbors. Result: fully explores one branch before backtracking to the next.',
+    },
+    code: `function dfs(graph, start) {
   let visited = new Set();
   let stack = [start];
-  
   while (stack.length > 0) {
     let node = stack.pop();
-    
-    if (!visited.has(node)) {
-      visited.add(node);
-      process(node);
-      
-      for (let neighbor of graph[node].reverse()) {
-        if (!visited.has(neighbor)) {
-          stack.push(neighbor);
-        }
+    if (visited.has(node)) continue;
+    visited.add(node);
+    // Process node
+    for (let neighbor of graph[node].reverse()) {
+      if (!visited.has(neighbor)) {
+        stack.push(neighbor);
       }
     }
   }
 }`,
-    generateSteps: (input?: number[] | GraphData): AlgorithmStep[] => {
-        const graph = (input && !Array.isArray(input)) ? input as GraphData : defaultGraph;
+    codeLanguages: {
+        js: `function dfs(graph, start) {
+  let visited = new Set();
+  let stack = [start];
+  while (stack.length > 0) {
+    let node = stack.pop();
+    if (visited.has(node)) continue;
+    visited.add(node);
+    for (let neighbor of graph[node].reverse()) {
+      if (!visited.has(neighbor))
+        stack.push(neighbor);
+    }
+  }
+}`,
+        python: `def dfs(graph, start):
+    visited = set()
+    stack = [start]
+    while stack:
+        node = stack.pop()
+        if node in visited:
+            continue
+        visited.add(node)
+        for neighbor in reversed(graph[node]):
+            if neighbor not in visited:
+                stack.append(neighbor)`,
+        c: `void dfs(int graph[][MAX], int n, int start) {
+    int visited[MAX] = {0};
+    int stack[MAX], top = -1;
+    stack[++top] = start;
+    while (top >= 0) {
+        int node = stack[top--];
+        if (visited[node]) continue;
+        visited[node] = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            if (graph[node][i] && !visited[i])
+                stack[++top] = i;
+        }
+    }
+}`,
+        cpp: `void dfs(vector<vector<int>>& graph, int start) {
+    vector<bool> visited(graph.size(), false);
+    stack<int> st;
+    st.push(start);
+    while (!st.empty()) {
+        int node = st.top(); st.pop();
+        if (visited[node]) continue;
+        visited[node] = true;
+        for (auto it = graph[node].rbegin();
+             it != graph[node].rend(); ++it) {
+            if (!visited[*it]) st.push(*it);
+        }
+    }
+}`,
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    generateSteps: (input?: any): AlgorithmStep[] => {
+        const graph: GraphData = (input && input.nodes) ? input : defaultGraph;
         const steps: AlgorithmStep[] = [];
-        const visited: number[] = [];
-        const stack: number[] = [0];
-        const visitedEdges: [number, number][] = [];
 
         const adj: Map<number, number[]> = new Map();
         graph.nodes.forEach(n => adj.set(n.id, []));
         graph.edges.forEach(e => {
             adj.get(e.from)?.push(e.to);
-            adj.get(e.to)?.push(e.from);
+            if (!graph.directed) adj.get(e.to)?.push(e.from);
         });
 
+        const visited: number[] = [];
+        const stack: number[] = [graph.nodes[0].id];
+        const visitedSet = new Set<number>();
+        const traversedEdges: [number, number][] = [];
+
         steps.push({
-            graph,
-            visited: [],
-            queue: [0],
-            description: `Bắt đầu DFS từ đỉnh 0. Thêm đỉnh 0 vào stack.`,
-            descriptionEn: `Start DFS from vertex 0. Push vertex 0 onto the stack.`,
+            graph, visited: [], queue: [...stack], current: graph.nodes[0].id, edges: [],
+            description: `Bắt đầu DFS từ đỉnh ${graph.nodes[0].label}. Đẩy vào stack.`,
+            descriptionEn: `Start DFS from node ${graph.nodes[0].label}. Push onto stack.`,
             codeLine: 2,
         });
 
         while (stack.length > 0) {
             const node = stack.pop()!;
+            if (visitedSet.has(node)) continue;
 
-            if (visited.includes(node)) continue;
-
+            visitedSet.add(node);
             visited.push(node);
 
             steps.push({
-                graph,
-                visited: [...visited],
-                current: node,
-                queue: [...stack],
-                edges: [...visitedEdges],
-                description: `Lấy đỉnh ${node} từ stack và đánh dấu đã thăm. Stack: [${stack.join(', ')}]`,
-                descriptionEn: `Pop vertex ${node} from stack and mark as visited. Stack: [${stack.join(', ')}]`,
-                codeLine: 6,
+                graph, visited: [...visited], queue: [...stack], current: node, edges: [...traversedEdges],
+                description: `Pop đỉnh ${node} từ stack. Đánh dấu đã thăm. Stack: [${stack.join(', ')}]`,
+                descriptionEn: `Pop node ${node} from stack. Mark as visited. Stack: [${stack.join(', ')}]`,
+                codeLine: 4,
             });
 
             const neighbors = (adj.get(node) || []).slice().reverse();
             for (const neighbor of neighbors) {
-                if (!visited.includes(neighbor)) {
+                if (!visitedSet.has(neighbor)) {
                     stack.push(neighbor);
-                    visitedEdges.push([node, neighbor]);
+                    traversedEdges.push([node, neighbor]);
 
                     steps.push({
-                        graph,
-                        visited: [...visited],
-                        current: node,
-                        queue: [...stack],
-                        edges: [...visitedEdges],
-                        description: `Push đỉnh ${neighbor} (kề của ${node}) vào stack. Stack: [${stack.join(', ')}]`,
-                        descriptionEn: `Push vertex ${neighbor} (neighbor of ${node}) onto stack. Stack: [${stack.join(', ')}]`,
-                        codeLine: 14,
+                        graph, visited: [...visited], queue: [...stack], current: node, edges: [...traversedEdges],
+                        description: `Đẩy đỉnh ${neighbor} (kề với ${node}) vào stack. Stack: [${stack.join(', ')}]`,
+                        descriptionEn: `Push node ${neighbor} (neighbor of ${node}) onto stack. Stack: [${stack.join(', ')}]`,
+                        codeLine: 9,
                     });
                 }
             }
         }
 
         steps.push({
-            graph,
-            visited: [...visited],
-            edges: [...visitedEdges],
-            description: `✅ DFS hoàn tất! Thứ tự duyệt: ${visited.join(' → ')}`,
-            descriptionEn: `✅ DFS complete! Traversal order: ${visited.join(' → ')}`,
-            codeLine: 18,
+            graph, visited: [...visited], queue: [], edges: [...traversedEdges],
+            description: `✅ DFS hoàn tất! Thứ tự duyệt: [${visited.join(' → ')}]`,
+            descriptionEn: `✅ DFS complete! Traversal order: [${visited.join(' → ')}]`,
+            codeLine: 14,
         });
-
         return steps;
     },
 };

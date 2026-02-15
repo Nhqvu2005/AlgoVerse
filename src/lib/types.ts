@@ -56,6 +56,28 @@ export interface TreeNode {
     isNew?: boolean;
 }
 
+export type CodeLanguage = 'js' | 'python' | 'c' | 'cpp';
+
+export interface CodeLanguages {
+    js: string;
+    python: string;
+    c: string;
+    cpp: string;
+}
+
+export interface AlgorithmGuide {
+    input: string;
+    inputEn: string;
+    conditions: string;
+    conditionsEn: string;
+    output: string;
+    outputEn: string;
+    explanation: string;
+    explanationEn: string;
+}
+
+export type InputType = 'array' | 'array-target' | 'graph' | 'none';
+
 export interface AlgorithmInfo {
     slug: string;
     name: string;
@@ -67,6 +89,10 @@ export interface AlgorithmInfo {
     timeComplexity: { best: string; average: string; worst: string };
     spaceComplexity: string;
     code: string;
+    codeLanguages?: CodeLanguages;
+    guide?: AlgorithmGuide;
+    inputType?: InputType;
+    defaultTarget?: number;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     generateSteps: (input?: any) => AlgorithmStep[];
     defaultInput?: number[];

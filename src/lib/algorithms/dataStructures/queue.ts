@@ -5,95 +5,142 @@ export const queue: AlgorithmInfo = {
     name: 'Queue',
     nameVi: 'Hàng đợi',
     category: 'data-structure',
-    categoryVi: 'Cấu trúc Dữ liệu',
-    description: 'Cấu trúc dữ liệu FIFO (First In, First Out) — phần tử vào trước sẽ ra trước. Giống như hàng đợi mua vé: người đến trước được phục vụ trước.',
-    descriptionEn: 'FIFO (First In, First Out) data structure — the first element added is the first removed. Like a ticket queue: first come, first served.',
+    categoryVi: 'Cấu trúc dữ liệu',
+    description: 'Cấu trúc dữ liệu FIFO (First In, First Out). Phần tử được thêm vào cuối và lấy ra từ đầu. Giống như hàng đợi mua vé.',
+    descriptionEn: 'FIFO (First In, First Out) data structure. Elements are added at the rear and removed from the front. Like a ticket queue.',
     timeComplexity: { best: 'O(1)', average: 'O(1)', worst: 'O(1)' },
     spaceComplexity: 'O(n)',
-    icon: '🚶',
+    icon: '🚶‍♂️',
+    inputType: 'none',
+    guide: {
+        input: 'Các thao tác: enqueue (thêm vào cuối) và dequeue (lấy ra từ đầu).',
+        inputEn: 'Operations: enqueue (add to rear) and dequeue (remove from front).',
+        conditions: 'Dequeue chỉ thực hiện được khi queue không rỗng.',
+        conditionsEn: 'Dequeue can only be performed when the queue is not empty.',
+        output: 'Với dequeue: phần tử được lấy ra là phần tử đầu tiên được thêm vào (FIFO).',
+        outputEn: 'For dequeue: the removed element is the first one that was added (FIFO).',
+        explanation: 'FIFO: phần tử vào trước ra trước. Enqueue O(1) thêm vào cuối. Dequeue O(1) lấy từ đầu. Ứng dụng: BFS, hàng đợi in, xử lý tác vụ theo thứ tự.',
+        explanationEn: 'FIFO: first in, first out. Enqueue O(1) adds to rear. Dequeue O(1) removes from front. Used in: BFS, print queue, task scheduling.',
+    },
     code: `class Queue {
   constructor() {
     this.items = [];
   }
-  
   enqueue(element) {
     this.items.push(element);
   }
-  
   dequeue() {
-    if (this.isEmpty()) return "Underflow";
+    if (this.isEmpty()) return null;
     return this.items.shift();
   }
-  
   front() {
     return this.items[0];
   }
-  
   isEmpty() {
     return this.items.length === 0;
   }
 }`,
+    codeLanguages: {
+        js: `class Queue {
+  constructor() { this.items = []; }
+  enqueue(el) { this.items.push(el); }
+  dequeue()   { return this.items.shift(); }
+  front()     { return this.items[0]; }
+  isEmpty()   { return this.items.length === 0; }
+}`,
+        python: `from collections import deque
+
+class Queue:
+    def __init__(self):
+        self.items = deque()
+    def enqueue(self, el):
+        self.items.append(el)
+    def dequeue(self):
+        return self.items.popleft()
+    def front(self):
+        return self.items[0]
+    def is_empty(self):
+        return len(self.items) == 0`,
+        c: `#define MAX 100
+int queue[MAX], front = 0, rear = -1;
+
+void enqueue(int val) {
+    if (rear < MAX - 1)
+        queue[++rear] = val;
+}
+int dequeue() {
+    if (front <= rear)
+        return queue[front++];
+    return -1;
+}
+int peek() {
+    return (front <= rear) ? queue[front] : -1;
+}`,
+        cpp: `class Queue {
+    deque<int> items;
+public:
+    void enqueue(int el) { items.push_back(el); }
+    int dequeue() {
+        int val = items.front();
+        items.pop_front();
+        return val;
+    }
+    int front() { return items.front(); }
+    bool isEmpty() { return items.empty(); }
+};`,
+    },
     generateSteps: (): AlgorithmStep[] => {
         const steps: AlgorithmStep[] = [];
         const q: number[] = [];
-        const operations = [
-            { op: 'enqueue', val: 10 },
-            { op: 'enqueue', val: 20 },
-            { op: 'enqueue', val: 30 },
-            { op: 'front', val: 0 },
-            { op: 'dequeue', val: 0 },
-            { op: 'enqueue', val: 40 },
-            { op: 'dequeue', val: 0 },
-            { op: 'enqueue', val: 50 },
-        ];
 
         steps.push({
-            queueData: [],
-            operation: 'init',
-            description: 'Khởi tạo Queue rỗng. Queue hoạt động theo nguyên tắc FIFO (First In, First Out).',
-            descriptionEn: 'Initialize empty Queue. Queue follows FIFO (First In, First Out) principle.',
+            queueData: [...q], operation: 'init',
+            description: 'Khởi tạo Queue rỗng.',
+            descriptionEn: 'Initialize an empty Queue.',
             codeLine: 1,
         });
 
-        for (const { op, val } of operations) {
-            if (op === 'enqueue') {
-                q.push(val);
+        const ops = [
+            { type: 'enqueue', val: 10 }, { type: 'enqueue', val: 20 },
+            { type: 'enqueue', val: 30 }, { type: 'front' },
+            { type: 'dequeue' }, { type: 'enqueue', val: 40 },
+            { type: 'dequeue' }, { type: 'dequeue' },
+        ];
+
+        for (const op of ops) {
+            if (op.type === 'enqueue') {
+                q.push(op.val!);
                 steps.push({
-                    queueData: [...q],
-                    activeNode: q.length - 1,
-                    operation: `enqueue(${val})`,
-                    description: `Enqueue ${val} vào cuối hàng đợi. Queue: [${q.join(', ')}]`,
-                    descriptionEn: `Enqueue ${val} at the back. Queue: [${q.join(', ')}]`,
-                    codeLine: 6,
+                    queueData: [...q], activeNode: op.val, operation: 'enqueue',
+                    description: `Enqueue ${op.val}. Queue: [${q.join(', ')}]`,
+                    descriptionEn: `Enqueue ${op.val}. Queue: [${q.join(', ')}]`,
+                    codeLine: 5,
                 });
-            } else if (op === 'dequeue') {
-                const dequeued = q.shift();
+            } else if (op.type === 'dequeue') {
+                const val = q.shift();
                 steps.push({
-                    queueData: [...q],
-                    operation: `dequeue() → ${dequeued}`,
-                    description: `Dequeue ${dequeued} từ đầu hàng đợi. Queue: [${q.join(', ')}]`,
-                    descriptionEn: `Dequeue ${dequeued} from the front. Queue: [${q.join(', ')}]`,
-                    codeLine: 10,
+                    queueData: [...q], activeNode: val, operation: 'dequeue',
+                    description: `Dequeue ${val} (phần tử đầu). Queue: [${q.join(', ')}]`,
+                    descriptionEn: `Dequeue ${val} (front element). Queue: [${q.join(', ')}]`,
+                    codeLine: 7,
                 });
-            } else if (op === 'front') {
+            } else if (op.type === 'front') {
+                const val = q[0];
                 steps.push({
-                    queueData: [...q],
-                    activeNode: 0,
-                    operation: `front() → ${q[0]}`,
-                    description: `Front: phần tử đầu hàng đợi = ${q[0]} (không xóa).`,
-                    descriptionEn: `Front: first element = ${q[0]} (not removed).`,
-                    codeLine: 15,
+                    queueData: [...q], activeNode: val, operation: 'front',
+                    description: `Front: phần tử đầu = ${val}. Queue không thay đổi.`,
+                    descriptionEn: `Front: first element = ${val}. Queue unchanged.`,
+                    codeLine: 12,
                 });
             }
         }
 
         steps.push({
             queueData: [...q],
-            description: `✅ Demo Queue hoàn tất! Queue hiện tại: [${q.join(', ')}]`,
-            descriptionEn: `✅ Queue demo complete! Current queue: [${q.join(', ')}]`,
-            codeLine: 20,
+            description: `✅ Hoàn tất demo Queue! Queue cuối: [${q.join(', ')}]`,
+            descriptionEn: `✅ Queue demo complete! Final queue: [${q.join(', ')}]`,
+            codeLine: 17,
         });
-
         return steps;
     },
 };

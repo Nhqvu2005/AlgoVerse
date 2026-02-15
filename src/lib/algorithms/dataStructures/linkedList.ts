@@ -5,136 +5,222 @@ export const linkedList: AlgorithmInfo = {
   name: 'Linked List',
   nameVi: 'Danh sách Liên kết',
   category: 'data-structure',
-  categoryVi: 'Cấu trúc Dữ liệu',
-  description: 'Cấu trúc dữ liệu tuyến tính, mỗi phần tử (node) chứa dữ liệu và con trỏ đến node tiếp theo. Cho phép chèn/xóa hiệu quả ở bất kỳ vị trí nào.',
-  descriptionEn: 'A linear data structure where each element (node) contains data and a pointer to the next node. Allows efficient insertion/deletion at any position.',
+  categoryVi: 'Cấu trúc dữ liệu',
+  description: 'Cấu trúc dữ liệu tuyến tính với các node liên kết nhau qua con trỏ. Mỗi node chứa dữ liệu và tham chiếu đến node tiếp theo.',
+  descriptionEn: 'A linear data structure with nodes linked via pointers. Each node contains data and a reference to the next node.',
   timeComplexity: { best: 'O(1)', average: 'O(n)', worst: 'O(n)' },
   spaceComplexity: 'O(n)',
   icon: '🔗',
+  inputType: 'none',
+  guide: {
+    input: 'Các thao tác: insert (chèn node) và delete (xóa node).',
+    inputEn: 'Operations: insert (add a node) and delete (remove a node).',
+    conditions: 'Chèn đầu O(1), chèn cuối O(n). Xóa cần tìm node trước node cần xóa.',
+    conditionsEn: 'Insert at head O(1), insert at tail O(n). Deletion requires finding the node before the target.',
+    output: 'Danh sách liên kết sau mỗi thao tác, thể hiện bằng node → node → ... → null.',
+    outputEn: 'The linked list after each operation, shown as node → node → ... → null.',
+    explanation: 'Linked List lưu trữ dữ liệu phi liên tục trong bộ nhớ. Mỗi node trỏ đến node tiếp theo. Ưu điểm: chèn/xóa đầu O(1), kích thước linh hoạt. Nhược điểm: truy cập ngẫu nhiên O(n), tốn thêm bộ nhớ cho con trỏ.',
+    explanationEn: 'Linked List stores data non-contiguously in memory. Each node points to the next. Advantages: O(1) head insert/delete, flexible size. Disadvantages: O(n) random access, extra memory for pointers.',
+  },
   code: `class Node {
-  constructor(data) {
-    this.data = data;
+  constructor(value) {
+    this.value = value;
     this.next = null;
   }
 }
 
 class LinkedList {
-  constructor() {
-    this.head = null;
+  constructor() { this.head = null; }
+  insertAtHead(value) {
+    let node = new Node(value);
+    node.next = this.head;
+    this.head = node;
   }
-  
-  insertAtHead(data) {
-    let newNode = new Node(data);
-    newNode.next = this.head;
-    this.head = newNode;
+  insertAtTail(value) {
+    let node = new Node(value);
+    if (!this.head) { this.head = node; return; }
+    let curr = this.head;
+    while (curr.next) curr = curr.next;
+    curr.next = node;
   }
-  
-  insertAtTail(data) {
-    let newNode = new Node(data);
-    if (!this.head) {
-      this.head = newNode;
-      return;
-    }
-    let current = this.head;
-    while (current.next) {
-      current = current.next;
-    }
-    current.next = newNode;
-  }
-  
-  deleteNode(data) {
+  delete(value) {
     if (!this.head) return;
-    if (this.head.data === data) {
-      this.head = this.head.next;
-      return;
+    if (this.head.value === value) {
+      this.head = this.head.next; return;
     }
-    let current = this.head;
-    while (current.next && current.next.data !== data) {
-      current = current.next;
-    }
-    if (current.next) {
-      current.next = current.next.next;
-    }
+    let curr = this.head;
+    while (curr.next && curr.next.value !== value)
+      curr = curr.next;
+    if (curr.next) curr.next = curr.next.next;
   }
 }`,
+  codeLanguages: {
+    js: `class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+class LinkedList {
+  constructor() { this.head = null; }
+  insertAtHead(val) {
+    let n = new Node(val);
+    n.next = this.head;
+    this.head = n;
+  }
+  delete(val) {
+    if (!this.head) return;
+    if (this.head.value === val) {
+      this.head = this.head.next; return;
+    }
+    let c = this.head;
+    while (c.next && c.next.value !== val) c = c.next;
+    if (c.next) c.next = c.next.next;
+  }
+}`,
+    python: `class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+    def insert_at_head(self, val):
+        n = Node(val)
+        n.next = self.head
+        self.head = n
+    def delete(self, val):
+        if not self.head: return
+        if self.head.value == val:
+            self.head = self.head.next; return
+        c = self.head
+        while c.next and c.next.value != val:
+            c = c.next
+        if c.next:
+            c.next = c.next.next`,
+    c: `typedef struct Node {
+    int value;
+    struct Node* next;
+} Node;
+
+Node* insertAtHead(Node* head, int val) {
+    Node* n = (Node*)malloc(sizeof(Node));
+    n->value = val;
+    n->next = head;
+    return n;
+}
+
+Node* deleteNode(Node* head, int val) {
+    if (!head) return NULL;
+    if (head->value == val) {
+        Node* t = head->next; free(head); return t;
+    }
+    Node* c = head;
+    while (c->next && c->next->value != val)
+        c = c->next;
+    if (c->next) {
+        Node* t = c->next;
+        c->next = t->next; free(t);
+    }
+    return head;
+}`,
+    cpp: `struct Node {
+    int value;
+    Node* next;
+    Node(int v) : value(v), next(nullptr) {}
+};
+
+class LinkedList {
+    Node* head = nullptr;
+public:
+    void insertAtHead(int val) {
+        Node* n = new Node(val);
+        n->next = head;
+        head = n;
+    }
+    void deleteNode(int val) {
+        if (!head) return;
+        if (head->value == val) {
+            Node* t = head; head = head->next;
+            delete t; return;
+        }
+        Node* c = head;
+        while (c->next && c->next->value != val)
+            c = c->next;
+        if (c->next) {
+            Node* t = c->next;
+            c->next = t->next;
+            delete t;
+        }
+    }
+};`,
+  },
   generateSteps: (): AlgorithmStep[] => {
     const steps: AlgorithmStep[] = [];
     let list: LinkedListNode[] = [];
 
     steps.push({
-      linkedList: [],
-      operation: 'init',
-      description: 'Khởi tạo Linked List rỗng. Head = null.',
-      descriptionEn: 'Initialize empty Linked List. Head = null.',
+      linkedList: [...list], operation: 'init',
+      description: 'Khởi tạo Linked List rỗng.',
+      descriptionEn: 'Initialize an empty Linked List.',
       codeLine: 8,
     });
 
-    list = [{ value: 10, isHead: true, isNew: true }];
+    // Insert at head: 10, 20, 30
+    const inserts = [10, 20, 30];
+    for (const val of inserts) {
+      const newNode: LinkedListNode = { value: val, isHead: true, isNew: true };
+      if (list.length > 0) list[0].isHead = false;
+      list = [newNode, ...list.map(n => ({ ...n, isNew: false }))];
+      for (let i = 0; i < list.length - 1; i++) list[i].next = i + 1;
+      steps.push({
+        linkedList: list.map(n => ({ ...n })), activeNode: val, operation: 'insert',
+        description: `Chèn ${val} vào đầu. List: ${list.map(n => n.value).join(' → ')} → null`,
+        descriptionEn: `Insert ${val} at head. List: ${list.map(n => n.value).join(' → ')} → null`,
+        codeLine: 10,
+      });
+    }
+
+    // Insert at tail: 5
+    const tailVal = 5;
+    const tailNode: LinkedListNode = { value: tailVal, isNew: true };
+    list = [...list.map(n => ({ ...n, isNew: false })), tailNode];
+    for (let i = 0; i < list.length - 1; i++) list[i].next = i + 1;
     steps.push({
-      linkedList: list.map(n => ({ ...n })),
-      operation: 'insertAtTail(10)',
-      activeNode: 0,
-      description: 'Insert 10 vào tail. Vì list rỗng nên 10 trở thành head.',
-      descriptionEn: 'Insert 10 at tail. Since list is empty, 10 becomes the head.',
-      codeLine: 18,
+      linkedList: list.map(n => ({ ...n })), activeNode: tailVal, operation: 'insert',
+      description: `Chèn ${tailVal} vào cuối. List: ${list.map(n => n.value).join(' → ')} → null`,
+      descriptionEn: `Insert ${tailVal} at tail. List: ${list.map(n => n.value).join(' → ')} → null`,
+      codeLine: 16,
     });
 
-    list = [{ value: 10, isHead: true, next: 1 }, { value: 20, isNew: true }];
-    steps.push({
-      linkedList: list.map(n => ({ ...n })),
-      operation: 'insertAtTail(20)',
-      activeNode: 1,
-      description: 'Insert 20 vào tail. Duyệt đến cuối rồi nối 20.',
-      descriptionEn: 'Insert 20 at tail. Traverse to end, then link 20.',
-      codeLine: 27,
-    });
-
-    list = [{ value: 10, isHead: true, next: 1 }, { value: 20, next: 2 }, { value: 30, isNew: true }];
-    steps.push({
-      linkedList: list.map(n => ({ ...n })),
-      operation: 'insertAtTail(30)',
-      activeNode: 2,
-      description: 'Insert 30 vào tail. 10 → 20 → 30.',
-      descriptionEn: 'Insert 30 at tail. 10 → 20 → 30.',
-      codeLine: 27,
-    });
-
-    list = [{ value: 5, isHead: true, isNew: true, next: 1 }, { value: 10, next: 2 }, { value: 20, next: 3 }, { value: 30 }];
-    steps.push({
-      linkedList: list.map(n => ({ ...n })),
-      operation: 'insertAtHead(5)',
-      activeNode: 0,
-      description: 'Insert 5 vào head. newNode.next = head cũ. 5 → 10 → 20 → 30.',
-      descriptionEn: 'Insert 5 at head. newNode.next = old head. 5 → 10 → 20 → 30.',
-      codeLine: 13,
-    });
-
-    list = [{ value: 5, isHead: true, next: 1 }, { value: 10, next: 2 }, { value: 20, isRemoving: true, next: 3 }, { value: 30 }];
-    steps.push({
-      linkedList: list.map(n => ({ ...n })),
-      operation: 'delete(20)',
-      activeNode: 2,
-      description: 'Xóa node 20. Tìm node có data=20, nối node trước nó đến node sau nó.',
-      descriptionEn: 'Delete node 20. Find node with data=20, link previous node to next node.',
-      codeLine: 38,
-    });
-
-    list = [{ value: 5, isHead: true, next: 1 }, { value: 10, next: 2 }, { value: 30 }];
-    steps.push({
-      linkedList: list.map(n => ({ ...n })),
-      operation: 'delete(20) ✓',
-      description: 'Đã xóa 20. Danh sách: 5 → 10 → 30.',
-      descriptionEn: 'Deleted 20. List: 5 → 10 → 30.',
-      codeLine: 40,
-    });
+    // Delete 20
+    const delVal = 20;
+    const delIdx = list.findIndex(n => n.value === delVal);
+    if (delIdx >= 0) {
+      list[delIdx] = { ...list[delIdx], isRemoving: true };
+      steps.push({
+        linkedList: list.map(n => ({ ...n })), activeNode: delVal, operation: 'delete',
+        description: `Tìm và xóa node ${delVal}.`,
+        descriptionEn: `Find and delete node ${delVal}.`,
+        codeLine: 22,
+      });
+      list = list.filter(n => n.value !== delVal);
+      for (let i = 0; i < list.length; i++) { list[i].next = i < list.length - 1 ? i + 1 : undefined; list[i].isNew = false; }
+      steps.push({
+        linkedList: list.map(n => ({ ...n })), operation: 'delete',
+        description: `Đã xóa ${delVal}. List: ${list.map(n => n.value).join(' → ')} → null`,
+        descriptionEn: `Deleted ${delVal}. List: ${list.map(n => n.value).join(' → ')} → null`,
+        codeLine: 29,
+      });
+    }
 
     steps.push({
       linkedList: list.map(n => ({ ...n })),
-      description: '✅ Demo Linked List hoàn tất! Danh sách: 5 → 10 → 30.',
-      descriptionEn: '✅ Linked List demo complete! List: 5 → 10 → 30.',
-      codeLine: 43,
+      description: `✅ Hoàn tất demo! List cuối: ${list.map(n => n.value).join(' → ')} → null`,
+      descriptionEn: `✅ Demo complete! Final list: ${list.map(n => n.value).join(' → ')} → null`,
+      codeLine: 30,
     });
-
     return steps;
   },
 };

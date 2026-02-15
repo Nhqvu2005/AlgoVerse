@@ -41,6 +41,9 @@ export const translations = {
             notFound: 'Không tìm thấy thuật toán',
             backHome: '← Quay về trang chủ',
             customInputLabel: '✏️ Nhập dữ liệu tùy chỉnh (cách nhau bởi dấu phẩy):',
+            targetLabel: '🎯 Giá trị cần tìm:',
+            graphNodesLabel: '🔵 Số đỉnh:',
+            graphEdgesLabel: '🔗 Danh sách cạnh (VD: 0-1, 1-2, 2-3):',
             apply: 'Áp dụng',
             complexity: '📊 Độ phức tạp',
             timeBest: 'Thời gian (tốt nhất)',
@@ -48,6 +51,13 @@ export const translations = {
             timeWorst: 'Thời gian (xấu nhất)',
             space: 'Không gian',
             description: '📝 Mô tả',
+            copy: 'Sao chép',
+            copied: 'Đã chép!',
+            guideTitle: '📖 Hướng dẫn sử dụng',
+            guideInput: 'Đầu vào',
+            guideConditions: 'Điều kiện',
+            guideOutput: 'Đầu ra',
+            guideExplanation: 'Giải thích',
         },
 
         // Footer
@@ -101,6 +111,9 @@ export const translations = {
             notFound: 'Algorithm not found',
             backHome: '← Back to Home',
             customInputLabel: '✏️ Custom input data (comma-separated):',
+            targetLabel: '🎯 Search target value:',
+            graphNodesLabel: '🔵 Number of nodes:',
+            graphEdgesLabel: '🔗 Edge list (e.g., 0-1, 1-2, 2-3):',
             apply: 'Apply',
             complexity: '📊 Complexity',
             timeBest: 'Time (best)',
@@ -108,6 +121,13 @@ export const translations = {
             timeWorst: 'Time (worst)',
             space: 'Space',
             description: '📝 Description',
+            copy: 'Copy',
+            copied: 'Copied!',
+            guideTitle: '📖 Usage Guide',
+            guideInput: 'Input',
+            guideConditions: 'Conditions',
+            guideOutput: 'Output',
+            guideExplanation: 'Explanation',
         },
 
         // Footer
@@ -147,6 +167,9 @@ export interface TranslationStrings {
         notFound: string;
         backHome: string;
         customInputLabel: string;
+        targetLabel: string;
+        graphNodesLabel: string;
+        graphEdgesLabel: string;
         apply: string;
         complexity: string;
         timeBest: string;
@@ -154,6 +177,13 @@ export interface TranslationStrings {
         timeWorst: string;
         space: string;
         description: string;
+        copy: string;
+        copied: string;
+        guideTitle: string;
+        guideInput: string;
+        guideConditions: string;
+        guideOutput: string;
+        guideExplanation: string;
     };
     footer: { text: string };
     langToggle: string;

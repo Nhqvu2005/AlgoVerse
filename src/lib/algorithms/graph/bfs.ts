@@ -2,13 +2,13 @@ import { AlgorithmInfo, AlgorithmStep, GraphData } from '../../types';
 
 const defaultGraph: GraphData = {
     nodes: [
-        { id: 0, label: '0', x: 200, y: 50 },
-        { id: 1, label: '1', x: 80, y: 150 },
-        { id: 2, label: '2', x: 320, y: 150 },
-        { id: 3, label: '3', x: 30, y: 280 },
-        { id: 4, label: '4', x: 150, y: 280 },
-        { id: 5, label: '5', x: 270, y: 280 },
-        { id: 6, label: '6', x: 380, y: 280 },
+        { id: 0, label: '0', x: 200, y: 30 },
+        { id: 1, label: '1', x: 100, y: 120 },
+        { id: 2, label: '2', x: 300, y: 120 },
+        { id: 3, label: '3', x: 50, y: 220 },
+        { id: 4, label: '4', x: 150, y: 220 },
+        { id: 5, label: '5', x: 250, y: 220 },
+        { id: 6, label: '6', x: 350, y: 220 },
     ],
     edges: [
         { from: 0, to: 1 }, { from: 0, to: 2 },
@@ -23,20 +23,29 @@ export const bfs: AlgorithmInfo = {
     nameVi: 'Tìm kiếm theo Chiều rộng',
     category: 'graph',
     categoryVi: 'Đồ thị',
-    description: 'Duyệt đồ thị theo chiều rộng, thăm tất cả đỉnh kề trước khi đi xa hơn. Sử dụng hàng đợi (Queue). BFS đảm bảo tìm đường đi ngắn nhất trong đồ thị không có trọng số.',
-    descriptionEn: 'Traverses the graph level by level, visiting all adjacent vertices before going deeper. Uses a Queue. BFS guarantees the shortest path in unweighted graphs.',
+    description: 'Duyệt đồ thị theo từng tầng, bắt đầu từ nút gốc. Sử dụng hàng đợi (Queue) để quản lý thứ tự duyệt. Đảm bảo tìm đường ngắn nhất trong đồ thị không trọng số.',
+    descriptionEn: 'Traverses a graph level by level, starting from the root node. Uses a Queue to manage traversal order. Guarantees shortest path in unweighted graphs.',
     timeComplexity: { best: 'O(V + E)', average: 'O(V + E)', worst: 'O(V + E)' },
     spaceComplexity: 'O(V)',
     icon: '🌊',
-    code: `function BFS(graph, start) {
+    inputType: 'graph',
+    guide: {
+        input: 'Đồ thị gồm các đỉnh và cạnh, cùng đỉnh bắt đầu (mặc định đỉnh 0).',
+        inputEn: 'A graph with nodes and edges, and a starting node (default node 0).',
+        conditions: 'Đồ thị có thể có hướng hoặc vô hướng. Đỉnh bắt đầu phải tồn tại trong đồ thị.',
+        conditionsEn: 'Graph can be directed or undirected. Starting node must exist in the graph.',
+        output: 'Thứ tự duyệt các đỉnh theo chiều rộng (level-order).',
+        outputEn: 'The order in which nodes are visited in breadth-first (level-order) order.',
+        explanation: 'BFS đặt đỉnh bắt đầu vào hàng đợi. Lặp lại: lấy đỉnh đầu hàng đợi, đánh dấu đã thăm, thêm các đỉnh kề chưa thăm vào cuối hàng đợi. Kết quả là các đỉnh được duyệt theo tầng (gần gốc trước).',
+        explanationEn: 'BFS enqueues the starting node. Repeat: dequeue the front node, mark as visited, and enqueue all unvisited neighbors. Result: nodes are visited level by level (closest to root first).',
+    },
+    code: `function bfs(graph, start) {
   let visited = new Set();
   let queue = [start];
   visited.add(start);
-  
   while (queue.length > 0) {
     let node = queue.shift();
-    process(node);
-    
+    // Process node
     for (let neighbor of graph[node]) {
       if (!visited.has(neighbor)) {
         visited.add(neighbor);
@@ -45,75 +54,123 @@ export const bfs: AlgorithmInfo = {
     }
   }
 }`,
-    generateSteps: (input?: number[] | GraphData): AlgorithmStep[] => {
-        const graph = (input && !Array.isArray(input)) ? input as GraphData : defaultGraph;
-        const steps: AlgorithmStep[] = [];
-        const visited: number[] = [];
-        const queue: number[] = [0];
-        const visitedEdges: [number, number][] = [];
+    codeLanguages: {
+        js: `function bfs(graph, start) {
+  let visited = new Set();
+  let queue = [start];
+  visited.add(start);
+  while (queue.length > 0) {
+    let node = queue.shift();
+    for (let neighbor of graph[node]) {
+      if (!visited.has(neighbor)) {
+        visited.add(neighbor);
+        queue.push(neighbor);
+      }
+    }
+  }
+}`,
+        python: `from collections import deque
 
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    visited.add(start)
+    while queue:
+        node = queue.popleft()
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)`,
+        c: `void bfs(int graph[][MAX], int n, int start) {
+    int visited[MAX] = {0};
+    int queue[MAX], front = 0, rear = 0;
+    queue[rear++] = start;
+    visited[start] = 1;
+    while (front < rear) {
+        int node = queue[front++];
+        for (int i = 0; i < n; i++) {
+            if (graph[node][i] && !visited[i]) {
+                visited[i] = 1;
+                queue[rear++] = i;
+            }
+        }
+    }
+}`,
+        cpp: `void bfs(vector<vector<int>>& graph, int start) {
+    vector<bool> visited(graph.size(), false);
+    queue<int> q;
+    q.push(start);
+    visited[start] = true;
+    while (!q.empty()) {
+        int node = q.front(); q.pop();
+        for (int neighbor : graph[node]) {
+            if (!visited[neighbor]) {
+                visited[neighbor] = true;
+                q.push(neighbor);
+            }
+        }
+    }
+}`,
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    generateSteps: (input?: any): AlgorithmStep[] => {
+        const graph: GraphData = (input && input.nodes) ? input : defaultGraph;
+        const steps: AlgorithmStep[] = [];
+
+        // Build adjacency list
         const adj: Map<number, number[]> = new Map();
         graph.nodes.forEach(n => adj.set(n.id, []));
         graph.edges.forEach(e => {
             adj.get(e.from)?.push(e.to);
-            adj.get(e.to)?.push(e.from);
+            if (!graph.directed) adj.get(e.to)?.push(e.from);
         });
 
+        const visited: number[] = [];
+        const queue: number[] = [graph.nodes[0].id];
+        const visitedSet = new Set<number>([graph.nodes[0].id]);
+        const traversedEdges: [number, number][] = [];
+
         steps.push({
-            graph,
-            visited: [],
-            queue: [0],
-            description: `Bắt đầu BFS từ đỉnh 0. Thêm đỉnh 0 vào hàng đợi.`,
-            descriptionEn: `Start BFS from vertex 0. Add vertex 0 to the queue.`,
+            graph, visited: [], queue: [...queue], current: graph.nodes[0].id, edges: [],
+            description: `Bắt đầu BFS từ đỉnh ${graph.nodes[0].label}. Thêm vào hàng đợi.`,
+            descriptionEn: `Start BFS from node ${graph.nodes[0].label}. Add to queue.`,
             codeLine: 2,
         });
 
-        visited.push(0);
-
         while (queue.length > 0) {
             const node = queue.shift()!;
+            visited.push(node);
 
             steps.push({
-                graph,
-                visited: [...visited],
-                current: node,
-                queue: [...queue],
-                edges: [...visitedEdges],
-                description: `Lấy đỉnh ${node} từ hàng đợi. Queue: [${queue.join(', ')}]`,
-                descriptionEn: `Dequeue vertex ${node}. Queue: [${queue.join(', ')}]`,
-                codeLine: 6,
+                graph, visited: [...visited], queue: [...queue], current: node, edges: [...traversedEdges],
+                description: `Lấy đỉnh ${node} từ hàng đợi. Đánh dấu đã thăm. Queue: [${queue.join(', ')}]`,
+                descriptionEn: `Dequeue node ${node}. Mark as visited. Queue: [${queue.join(', ')}]`,
+                codeLine: 5,
             });
 
             const neighbors = adj.get(node) || [];
             for (const neighbor of neighbors) {
-                if (!visited.includes(neighbor)) {
-                    visited.push(neighbor);
+                if (!visitedSet.has(neighbor)) {
+                    visitedSet.add(neighbor);
                     queue.push(neighbor);
-                    visitedEdges.push([node, neighbor]);
+                    traversedEdges.push([node, neighbor]);
 
                     steps.push({
-                        graph,
-                        visited: [...visited],
-                        current: node,
-                        queue: [...queue],
-                        edges: [...visitedEdges],
-                        description: `Thăm đỉnh ${neighbor} (kề của ${node}). Thêm vào queue. Queue: [${queue.join(', ')}]`,
-                        descriptionEn: `Visit vertex ${neighbor} (neighbor of ${node}). Enqueue. Queue: [${queue.join(', ')}]`,
-                        codeLine: 12,
+                        graph, visited: [...visited], queue: [...queue], current: node, edges: [...traversedEdges],
+                        description: `Thêm đỉnh ${neighbor} (kề với ${node}) vào hàng đợi. Queue: [${queue.join(', ')}]`,
+                        descriptionEn: `Enqueue node ${neighbor} (neighbor of ${node}). Queue: [${queue.join(', ')}]`,
+                        codeLine: 9,
                     });
                 }
             }
         }
 
         steps.push({
-            graph,
-            visited: [...visited],
-            edges: [...visitedEdges],
-            description: `✅ BFS hoàn tất! Thứ tự duyệt: ${visited.join(' → ')}`,
-            descriptionEn: `✅ BFS complete! Traversal order: ${visited.join(' → ')}`,
-            codeLine: 16,
+            graph, visited: [...visited], queue: [], edges: [...traversedEdges],
+            description: `✅ BFS hoàn tất! Thứ tự duyệt: [${visited.join(' → ')}]`,
+            descriptionEn: `✅ BFS complete! Traversal order: [${visited.join(' → ')}]`,
+            codeLine: 13,
         });
-
         return steps;
     },
 };

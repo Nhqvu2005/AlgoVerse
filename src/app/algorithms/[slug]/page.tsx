@@ -10,7 +10,7 @@ import ArrayVisualizer from '@/components/visualizers/ArrayVisualizer';
 import GraphVisualizer from '@/components/visualizers/GraphVisualizer';
 import DataStructureVisualizer from '@/components/visualizers/DataStructureVisualizer';
 import { getAlgorithmBySlug } from '@/lib/algorithmRegistry';
-import { AlgorithmStep, categoryConfig } from '@/lib/types';
+import { AlgorithmStep, GraphData, categoryConfig } from '@/lib/types';
 import { useLanguage } from '@/lib/LanguageContext';
 
 export default function AlgorithmPage() {
@@ -24,19 +24,68 @@ export default function AlgorithmPage() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [speed, setSpeed] = useState(1);
     const [customInput, setCustomInput] = useState('');
+    const [customTarget, setCustomTarget] = useState('');
+    const [graphNodes, setGraphNodes] = useState('');
+    const [graphEdges, setGraphEdges] = useState('');
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
     const initSteps = useCallback(() => {
         if (!algo) return;
-        let input: number[] | undefined;
-        if (customInput.trim()) {
-            input = customInput.split(',').map(s => parseInt(s.trim())).filter(n => !isNaN(n));
+        const inputType = algo.inputType || 'array';
+
+        if (inputType === 'array-target') {
+            // Search algorithms: parse array + target
+            let input: number[] | undefined;
+            if (customInput.trim()) {
+                input = customInput.split(',').map(s => parseInt(s.trim())).filter(n => !isNaN(n));
+            }
+            const target = customTarget.trim() ? parseInt(customTarget.trim()) : undefined;
+            const newSteps = algo.generateSteps({
+                array: input || algo.defaultInput,
+                target: !isNaN(target as number) ? target : algo.defaultTarget,
+            });
+            setSteps(newSteps);
+        } else if (inputType === 'graph') {
+            // Graph algorithms: parse nodes + edges
+            if (graphNodes.trim() || graphEdges.trim()) {
+                const nodeCount = parseInt(graphNodes.trim()) || 7;
+                const edgePairs = graphEdges.trim().split(',').map(e => {
+                    const parts = e.trim().split('-').map(p => parseInt(p.trim()));
+                    return parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])
+                        ? { from: parts[0], to: parts[1] }
+                        : null;
+                }).filter(Boolean) as { from: number; to: number }[];
+
+                if (edgePairs.length > 0) {
+                    // Auto-layout nodes in a circle
+                    const nodes = Array.from({ length: nodeCount }, (_, i) => ({
+                        id: i,
+                        label: String(i),
+                        x: 200 + 150 * Math.cos((2 * Math.PI * i) / nodeCount - Math.PI / 2),
+                        y: 170 + 130 * Math.sin((2 * Math.PI * i) / nodeCount - Math.PI / 2),
+                    }));
+                    const graphData: GraphData = { nodes, edges: edgePairs };
+                    setSteps(algo.generateSteps(graphData));
+                } else {
+                    setSteps(algo.generateSteps());
+                }
+            } else {
+                setSteps(algo.generateSteps());
+            }
+        } else if (inputType === 'array') {
+            let input: number[] | undefined;
+            if (customInput.trim()) {
+                input = customInput.split(',').map(s => parseInt(s.trim())).filter(n => !isNaN(n));
+            }
+            setSteps(algo.generateSteps(input || algo.defaultInput));
+        } else {
+            // none (data structures)
+            setSteps(algo.generateSteps());
         }
-        const newSteps = algo.generateSteps(input || algo.defaultInput);
-        setSteps(newSteps);
+
         setCurrentStep(0);
         setIsPlaying(false);
-    }, [algo, customInput]);
+    }, [algo, customInput, customTarget, graphNodes, graphEdges]);
 
     useEffect(() => {
         initSteps();
@@ -77,6 +126,7 @@ export default function AlgorithmPage() {
 
     const step = steps[currentStep] || { description: '' };
     const catConf = categoryConfig[algo.category];
+    const inputType = algo.inputType || (algo.category === 'sorting' ? 'array' : algo.category === 'searching' ? 'array-target' : algo.category === 'graph' ? 'graph' : 'none');
 
     const renderVisualizer = () => {
         if (algo.category === 'sorting' || algo.category === 'searching') {
@@ -148,8 +198,8 @@ export default function AlgorithmPage() {
                             onSpeedChange={setSpeed}
                         />
 
-                        {/* Custom Input */}
-                        {(algo.category === 'sorting' || algo.category === 'searching') && (
+                        {/* Custom Input — Array */}
+                        {(inputType === 'array' || inputType === 'array-target') && (
                             <div className="glass rounded-xl p-4">
                                 <label className="text-sm text-text-secondary mb-2 block">
                                     {t.detail.customInputLabel}
@@ -160,6 +210,60 @@ export default function AlgorithmPage() {
                                         placeholder={algo.defaultInput?.join(', ')}
                                         value={customInput}
                                         onChange={(e) => setCustomInput(e.target.value)}
+                                        className="input-field flex-1"
+                                    />
+                                    {inputType !== 'array-target' && (
+                                        <button onClick={initSteps} className="btn-primary whitespace-nowrap">
+                                            {t.detail.apply}
+                                        </button>
+                                    )}
+                                </div>
+
+                                {/* Target input for searching */}
+                                {inputType === 'array-target' && (
+                                    <>
+                                        <label className="text-sm text-text-secondary mb-2 block mt-3">
+                                            {t.detail.targetLabel}
+                                        </label>
+                                        <div className="flex gap-2">
+                                            <input
+                                                type="number"
+                                                placeholder={String(algo.defaultTarget ?? '')}
+                                                value={customTarget}
+                                                onChange={(e) => setCustomTarget(e.target.value)}
+                                                className="input-field flex-1"
+                                            />
+                                            <button onClick={initSteps} className="btn-primary whitespace-nowrap">
+                                                {t.detail.apply}
+                                            </button>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        )}
+
+                        {/* Custom Input — Graph */}
+                        {inputType === 'graph' && (
+                            <div className="glass rounded-xl p-4">
+                                <label className="text-sm text-text-secondary mb-2 block">
+                                    {t.detail.graphNodesLabel}
+                                </label>
+                                <input
+                                    type="number"
+                                    placeholder="7"
+                                    value={graphNodes}
+                                    onChange={(e) => setGraphNodes(e.target.value)}
+                                    className="input-field w-full mb-3"
+                                />
+                                <label className="text-sm text-text-secondary mb-2 block">
+                                    {t.detail.graphEdgesLabel}
+                                </label>
+                                <div className="flex gap-2">
+                                    <input
+                                        type="text"
+                                        placeholder="0-1, 0-2, 1-3, 1-4, 2-5, 2-6"
+                                        value={graphEdges}
+                                        onChange={(e) => setGraphEdges(e.target.value)}
                                         className="input-field flex-1"
                                     />
                                     <button onClick={initSteps} className="btn-primary whitespace-nowrap">
@@ -187,7 +291,11 @@ export default function AlgorithmPage() {
                     {/* Sidebar */}
                     <div className="space-y-4">
                         {/* Code Display */}
-                        <CodeDisplay code={algo.code} activeLine={step.codeLine} />
+                        <CodeDisplay
+                            code={algo.code}
+                            codeLanguages={algo.codeLanguages}
+                            activeLine={step.codeLine}
+                        />
 
                         {/* Complexity Info */}
                         <div className="glass rounded-xl p-4">
@@ -212,6 +320,42 @@ export default function AlgorithmPage() {
                                 </div>
                             </div>
                         </div>
+
+                        {/* Usage Guide */}
+                        {algo.guide && (
+                            <div className="glass rounded-xl p-4">
+                                <h3 className="font-heading text-sm text-white mb-3">{t.detail.guideTitle}</h3>
+                                <div className="space-y-3 text-sm">
+                                    <div>
+                                        <span className="text-primary font-semibold text-xs uppercase tracking-wider">{t.detail.guideInput}</span>
+                                        <p className="text-text-secondary mt-1 leading-relaxed">
+                                            {locale === 'vi' ? algo.guide.input : algo.guide.inputEn}
+                                        </p>
+                                    </div>
+                                    <div className="divider" />
+                                    <div>
+                                        <span className="text-warning font-semibold text-xs uppercase tracking-wider">{t.detail.guideConditions}</span>
+                                        <p className="text-text-secondary mt-1 leading-relaxed">
+                                            {locale === 'vi' ? algo.guide.conditions : algo.guide.conditionsEn}
+                                        </p>
+                                    </div>
+                                    <div className="divider" />
+                                    <div>
+                                        <span className="text-success font-semibold text-xs uppercase tracking-wider">{t.detail.guideOutput}</span>
+                                        <p className="text-text-secondary mt-1 leading-relaxed">
+                                            {locale === 'vi' ? algo.guide.output : algo.guide.outputEn}
+                                        </p>
+                                    </div>
+                                    <div className="divider" />
+                                    <div>
+                                        <span className="text-accent font-semibold text-xs uppercase tracking-wider">{t.detail.guideExplanation}</span>
+                                        <p className="text-text-secondary mt-1 leading-relaxed">
+                                            {locale === 'vi' ? algo.guide.explanation : algo.guide.explanationEn}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
 
                         {/* Description */}
                         <div className="glass rounded-xl p-4">
