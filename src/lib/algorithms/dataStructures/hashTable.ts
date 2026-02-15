@@ -26,6 +26,12 @@ class HashTable {
 
         if (!this.table[index]) {
             this.table[index] = [];
+        } else {
+            this.addStep(
+                `❗ Va chạm tại bucket ${index}! (Đã có ${this.table[index].length} phần tử). Thêm vào cuối danh sách.`,
+                `❗ Collision at bucket ${index}! (${this.table[index].length} elements exist). Appending to list.`,
+                undefined, index
+            );
         }
 
         this.table[index].push(key);
@@ -98,8 +104,8 @@ export const hashTable: AlgorithmInfo = {
     slug: 'hash-table',
     name: 'Bảng băm (Hash Table)',
     nameVi: 'Bảng băm (Hash Table)',
-    description: 'Bảng băm lưu trữ dữ liệu dưới dạng cặp khóa-giá trị. Sử dụng hàm băm để ánh xạ khóa vào chỉ mục của mảng.',
-    descriptionEn: 'Hash Table stores data as key-value pairs. It uses a hash function to map keys to indices of an array.',
+    description: 'Bảng băm lưu trữ dữ liệu dưới dạng cặp khóa-giá trị. Sử dụng hàm băm (Vd: Modulo) để ánh xạ khóa vào chỉ mục. Nếu hai khóa có cùng chỉ mục (Va chạm), ta dùng Chaining (Danh sách liên kết) hoặc Open Addressing.',
+    descriptionEn: 'Hash Table stores data as key-value pairs using a hash function (e.g., Modulo). Checking for collisions (keys mapping to same index), handled via Chaining (Linked Lists) or Open Addressing.',
     category: 'data-structure',
     categoryVi: 'Cấu trúc DL',
     timeComplexity: { best: 'O(1)', average: 'O(1)', worst: 'O(n)' },
@@ -112,12 +118,12 @@ export const hashTable: AlgorithmInfo = {
     guide: {
         input: 'Danh sách số nguyên.',
         inputEn: 'List of integers.',
-        conditions: 'Số nguyên bất kỳ.',
-        conditionsEn: 'Any integers.',
+        conditions: 'Hàm băm: key % 7.',
+        conditionsEn: 'Hash Function: key % 7.',
         output: 'Trạng thái bảng băm và xử lý va chạm.',
         outputEn: 'Hash table state and collision handling.',
-        explanation: 'Minh họa phương pháp Chaining để xử lý va chạm.',
-        explanationEn: 'Illustrates Chaining method for collision resolution.'
+        explanation: 'Phương pháp chia (Division Method): h(k) = k mod m. Xử lý va chạm bằng phương pháp Xâu chuỗi (Chaining) - thêm vào danh sách tại bucket.',
+        explanationEn: 'Division Method: h(k) = k mod m. Collision handling via Chaining - appending to list at bucket.'
     },
 
     generateSteps: (input: number[] = [10, 20, 15, 7, 22]) => {

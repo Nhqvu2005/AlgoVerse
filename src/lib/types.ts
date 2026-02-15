@@ -33,11 +33,12 @@ export interface AlgorithmStep {
     codeLines?: { [key in CodeLanguage]?: number }; // highlighted line per language
     variables?: { [key: string]: string | number | boolean }; // step-specific variable state
     hashTable?: { index: number; content: string }[]; // simplified hash table state
+    trie?: TrieNode; // Trie root node
 }
 
 export interface GraphData {
     nodes: { id: number; label: string; x: number; y: number }[];
-    edges: { from: number; to: number }[];
+    edges: { from: number; to: number; label?: string }[];
     directed?: boolean;
 }
 
@@ -57,6 +58,15 @@ export interface TreeNode {
     y?: number;
     highlighted?: boolean;
     isNew?: boolean;
+}
+
+export interface TrieNode {
+    children: Record<string, TrieNode>;
+    isEndOfWord: boolean;
+    char: string;
+    highlighted?: boolean;
+    isNew?: boolean;
+    width?: number; // for visualizer layout
 }
 
 export type CodeLanguage = 'js' | 'python' | 'c' | 'cpp';

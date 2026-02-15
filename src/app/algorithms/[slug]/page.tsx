@@ -11,6 +11,7 @@ import GraphVisualizer from '@/components/visualizers/GraphVisualizer';
 import DataStructureVisualizer from '@/components/visualizers/DataStructureVisualizer';
 import ConceptVisualizer from '@/components/visualizers/ConceptVisualizer';
 import HashTableVisualizer from '@/components/visualizers/HashTableVisualizer';
+import TrieVisualizer from '@/components/visualizers/TrieVisualizer';
 import { getAlgorithmBySlug } from '@/lib/algorithmRegistry';
 import { AlgorithmStep, GraphData, categoryConfig } from '@/lib/types';
 import { useLanguage } from '@/lib/LanguageContext';
@@ -138,6 +139,8 @@ export default function AlgorithmPage() {
         } else if (algo.category === 'data-structure') {
             if (algo.slug === 'hash-table') {
                 return <HashTableVisualizer step={step} />;
+            } else if (algo.slug === 'trie') {
+                return <TrieVisualizer step={step} />;
             }
             const dsType = algo.slug === 'stack' ? 'stack'
                 : algo.slug === 'queue' ? 'queue'

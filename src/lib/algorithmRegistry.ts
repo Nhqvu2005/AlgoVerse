@@ -18,6 +18,9 @@ import { conditionals } from './algorithms/basics/conditionals';
 import { heap } from './algorithms/dataStructures/heap';
 import { hashTable } from './algorithms/dataStructures/hashTable';
 import { avlTree } from './algorithms/dataStructures/avlTree';
+import { dijkstra } from './algorithms/graph/dijkstra';
+import { prim } from './algorithms/graph/prim';
+import { trie } from './algorithms/dataStructures/trie';
 
 export const algorithms: AlgorithmInfo[] = [
     bubbleSort,
@@ -40,6 +43,9 @@ export const algorithms: AlgorithmInfo[] = [
     heap,
     hashTable,
     avlTree,
+    dijkstra,
+    prim,
+    trie,
 ];
 
 export function getAlgorithmBySlug(slug: string): AlgorithmInfo | undefined {

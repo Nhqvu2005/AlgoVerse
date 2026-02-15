@@ -33,7 +33,7 @@ export const translations = {
             searching: 'Tìm kiếm',
             graph: 'Đồ thị',
             'data-structure': 'Cấu trúc DL',
-            concept: 'Cơ bản',
+            concept: 'Nhập môn',
         },
 
         // Algorithm detail page
@@ -104,7 +104,7 @@ export const translations = {
             searching: 'Searching',
             graph: 'Graph',
             'data-structure': 'Data Structures',
-            concept: 'Basic Concepts',
+            concept: 'Beginner',
         },
 
         // Algorithm detail page
