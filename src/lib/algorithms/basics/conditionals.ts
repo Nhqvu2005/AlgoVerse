@@ -75,7 +75,7 @@ cout << result << endl;`
 
 export const conditionals: AlgorithmInfo = {
     slug: 'conditionals',
-    name: 'Rẽ nhánh (If-Else)',
+    name: 'Conditionals (If-Else)',
     nameVi: 'Rẽ nhánh (If-Else)',
     description: 'Cấu trúc rẽ nhánh cho phép chương trình thực hiện các hành động khác nhau tùy thuộc vào điều kiện boolean.',
     descriptionEn: 'Conditionals allow the program to execute different actions based on boolean conditions.',

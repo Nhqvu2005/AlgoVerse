@@ -79,7 +79,7 @@ Node* insert(Node* node, int key) {
 
 export const avlTree: AlgorithmInfo = {
     slug: 'avl-tree',
-    name: 'Cây AVL (AVL Tree)',
+    name: 'AVL Tree',
     nameVi: 'Cây AVL (Cân bằng)',
     description: 'Cây AVL là cây nhị phân tìm kiếm tự cân bằng. Chiều cao của hai cây con của bất kỳ nút nào chỉ chênh lệch tối đa là 1.',
     descriptionEn: 'AVL Tree is a self-balancing Binary Search Tree. The heights of the two child subtrees of any node differ by at most one.',

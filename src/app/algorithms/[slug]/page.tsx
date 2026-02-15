@@ -173,8 +173,8 @@ export default function AlgorithmPage() {
                         <div className="flex items-center gap-3">
                             <span className="text-3xl">{algo.icon}</span>
                             <div>
-                                <h1 className="font-heading text-2xl md:text-3xl text-white">{algo.name}</h1>
-                                <p className="text-text-muted text-sm">{algo.nameVi}</p>
+                                <h1 className="font-heading text-2xl md:text-3xl text-white">{locale === 'vi' ? algo.nameVi : algo.name}</h1>
+                                <p className="text-text-muted text-sm">{locale === 'vi' ? algo.name : algo.nameVi}</p>
                             </div>
                         </div>
 

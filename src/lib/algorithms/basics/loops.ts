@@ -64,8 +64,8 @@ while (count > 0) {
 
 export const loops: AlgorithmInfo = {
     slug: 'loops',
-    name: 'Vòng lặp (Loops)',
-    nameVi: 'Vòng lặp (Loops)',
+    name: 'Loops',
+    nameVi: 'Vòng lặp',
     description: 'Vòng lặp cho phép thực thi một đoạn mã nhiều lần. For loop thường dùng khi biết trước số lần lặp, While loop dùng khi lặp theo điều kiện.',
     descriptionEn: 'Loops allow executing a block of code multiple times. For loops are used when the number of iterations is known, While loops are condition-based.',
     category: 'concept',

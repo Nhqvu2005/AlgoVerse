@@ -77,8 +77,8 @@ arr.pop_back();`
 
 export const arrays: AlgorithmInfo = {
     slug: 'arrays',
-    name: 'Mảng (Arrays)',
-    nameVi: 'Mảng (Arrays)',
+    name: 'Arrays',
+    nameVi: 'Mảng',
     description: 'Mảng là tập hợp các phần tử được lưu trữ tại các ô nhớ liền kề. Truy cập phần tử rất nhanh theo chỉ số (O(1)).',
     descriptionEn: 'An Array is a collection of elements stored at contiguous memory locations. Accessing elements by index is very fast (O(1)).',
     category: 'concept',

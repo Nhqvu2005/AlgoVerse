@@ -102,8 +102,8 @@ void insert(int key) {
 
 export const hashTable: AlgorithmInfo = {
     slug: 'hash-table',
-    name: 'Bảng băm (Hash Table)',
-    nameVi: 'Bảng băm (Hash Table)',
+    name: 'Hash Table',
+    nameVi: 'Bảng băm',
     description: 'Bảng băm lưu trữ dữ liệu dưới dạng cặp khóa-giá trị. Sử dụng hàm băm (Vd: Modulo) để ánh xạ khóa vào chỉ mục. Nếu hai khóa có cùng chỉ mục (Va chạm), ta dùng Chaining (Danh sách liên kết) hoặc Open Addressing.',
     descriptionEn: 'Hash Table stores data as key-value pairs using a hash function (e.g., Modulo). Checking for collisions (keys mapping to same index), handled via Chaining (Linked Lists) or Open Addressing.',
     category: 'data-structure',

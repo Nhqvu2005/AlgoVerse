@@ -111,8 +111,8 @@ export default function HomePage() {
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${activeCategory === cat
-                      ? 'bg-primary/20 text-primary-light border border-primary/40 shadow-glow-sm'
-                      : 'bg-surface/50 text-text-secondary border border-white/5 hover:border-primary/20 hover:text-white'
+                    ? 'bg-primary/20 text-primary-light border border-primary/40 shadow-glow-sm'
+                    : 'bg-surface/50 text-text-secondary border border-white/5 hover:border-primary/20 hover:text-white'
                     }`}
                 >
                   {cat === 'all'
@@ -141,9 +141,9 @@ export default function HomePage() {
                     <span className="text-2xl">{algo.icon}</span>
                     <div className="flex-1 min-w-0">
                       <h3 className="font-heading text-base text-white group-hover:text-primary-light transition-colors truncate">
-                        {algo.name}
+                        {locale === 'vi' ? algo.nameVi : algo.name}
                       </h3>
-                      <p className="text-xs text-text-muted">{algo.nameVi}</p>
+                      <p className="text-xs text-text-muted">{locale === 'vi' ? algo.name : algo.nameVi}</p>
                     </div>
                   </div>
 
