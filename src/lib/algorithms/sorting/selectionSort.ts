@@ -92,6 +92,7 @@ export const selectionSort: AlgorithmInfo = {
             description: `Bắt đầu với mảng: [${arr.join(', ')}]. Selection Sort sẽ tìm phần tử nhỏ nhất và đưa lên đầu.`,
             descriptionEn: `Starting with array: [${arr.join(', ')}]. Selection Sort will find the smallest element and move it to the front.`,
             codeLine: 1,
+            codeLines: { js: 1, python: 1, c: 1, cpp: 1 },
         });
 
         for (let i = 0; i < n - 1; i++) {
@@ -100,7 +101,8 @@ export const selectionSort: AlgorithmInfo = {
                 array: [...arr], highlights: [i], sorted: [...sorted],
                 description: `Lượt ${i + 1}: Tìm phần tử nhỏ nhất từ vị trí ${i} đến ${n - 1}. Giả sử min = arr[${i}] = ${arr[i]}`,
                 descriptionEn: `Pass ${i + 1}: Find smallest from index ${i} to ${n - 1}. Assume min = arr[${i}] = ${arr[i]}`,
-                codeLine: 3,
+                codeLine: 4,
+                codeLines: { js: 4, python: 4, c: 3, cpp: 3 },
             });
 
             for (let j = i + 1; j < n; j++) {
@@ -108,7 +110,8 @@ export const selectionSort: AlgorithmInfo = {
                     array: [...arr], highlights: [minIdx, j], sorted: [...sorted],
                     description: `So sánh arr[${j}] = ${arr[j]} với min hiện tại = ${arr[minIdx]}`,
                     descriptionEn: `Compare arr[${j}] = ${arr[j]} with current min = ${arr[minIdx]}`,
-                    codeLine: 5,
+                    codeLine: 6,
+                    codeLines: { js: 6, python: 6, c: 5, cpp: 5 },
                 });
                 if (arr[j] < arr[minIdx]) {
                     minIdx = j;
@@ -117,6 +120,7 @@ export const selectionSort: AlgorithmInfo = {
                         description: `Tìm thấy giá trị nhỏ hơn! minIdx = ${minIdx}, min = ${arr[minIdx]}`,
                         descriptionEn: `Found smaller value! minIdx = ${minIdx}, min = ${arr[minIdx]}`,
                         codeLine: 6,
+                        codeLines: { js: 6, python: 7, c: 6, cpp: 6 },
                     });
                 }
             }
@@ -127,7 +131,8 @@ export const selectionSort: AlgorithmInfo = {
                     array: [...arr], swapping: [i, minIdx], sorted: [...sorted],
                     description: `Hoán đổi arr[${i}] với arr[${minIdx}]. Đặt ${arr[i]} vào vị trí ${i}.`,
                     descriptionEn: `Swap arr[${i}] with arr[${minIdx}]. Place ${arr[i]} at position ${i}.`,
-                    codeLine: 10,
+                    codeLine: 8,
+                    codeLines: { js: 8, python: 8, c: 8, cpp: 8 },
                 });
             }
             sorted.push(i);
@@ -138,7 +143,8 @@ export const selectionSort: AlgorithmInfo = {
             array: [...arr], sorted: Array.from({ length: n }, (_, i) => i),
             description: `✅ Sắp xếp hoàn tất! Mảng: [${arr.join(', ')}]`,
             descriptionEn: `✅ Sorting complete! Array: [${arr.join(', ')}]`,
-            codeLine: 12,
+            codeLine: 10,
+            codeLines: { js: 10, python: 9, c: 11, cpp: 10 },
         });
 
         return steps;

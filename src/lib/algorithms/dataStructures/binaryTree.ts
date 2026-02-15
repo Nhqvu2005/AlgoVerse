@@ -151,6 +151,7 @@ BSTNode* search(BSTNode* root, int val) {
             description: 'Khởi tạo cây BST rỗng.',
             descriptionEn: 'Initialize an empty BST.',
             codeLine: 1,
+            codeLines: { js: 75, python: 88, c: 115, cpp: 129 },
         });
 
         const values = [50, 30, 70, 20, 40, 60, 80];
@@ -162,6 +163,7 @@ BSTNode* search(BSTNode* root, int val) {
                 description: `Chèn ${val} vào BST. So sánh và đi theo nhánh phù hợp.`,
                 descriptionEn: `Insert ${val} into BST. Compare and follow the appropriate branch.`,
                 codeLine: 9,
+                codeLines: { js: 75, python: 88, c: 115, cpp: 129 },
             });
         }
 
@@ -179,6 +181,7 @@ BSTNode* search(BSTNode* root, int val) {
             description: 'Tìm kiếm giá trị 40: 50→30→40. Tìm thấy!',
             descriptionEn: 'Search for value 40: 50→30→40. Found!',
             codeLine: 17,
+            codeLines: { js: 75, python: 97, c: 115, cpp: 138 },
         });
 
         steps.push({
@@ -186,6 +189,7 @@ BSTNode* search(BSTNode* root, int val) {
             description: `✅ Hoàn tất demo BST! Cây chứa: [${values.join(', ')}]`,
             descriptionEn: `✅ BST demo complete! Tree contains: [${values.join(', ')}]`,
             codeLine: 22,
+            codeLines: { js: 82, python: 102, c: 122, cpp: 143 },
         });
         return steps;
     },

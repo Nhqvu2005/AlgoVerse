@@ -90,6 +90,7 @@ export const insertionSort: AlgorithmInfo = {
             description: `Bắt đầu: [${arr.join(', ')}]. Phần tử đầu tiên (${arr[0]}) coi như đã sắp xếp.`,
             descriptionEn: `Start: [${arr.join(', ')}]. First element (${arr[0]}) is considered sorted.`,
             codeLine: 1,
+            codeLines: { js: 1, python: 1, c: 1, cpp: 1 },
         });
 
         for (let i = 1; i < n; i++) {
@@ -100,7 +101,8 @@ export const insertionSort: AlgorithmInfo = {
                 array: [...arr], highlights: [i], sorted: Array.from({ length: i }, (_, k) => k),
                 description: `Chọn key = arr[${i}] = ${key}. Tìm vị trí chèn trong phần đã sắp xếp.`,
                 descriptionEn: `Pick key = arr[${i}] = ${key}. Find insertion position in sorted portion.`,
-                codeLine: 2,
+                codeLine: 3,
+                codeLines: { js: 3, python: 3, c: 3, cpp: 3 },
             });
 
             while (j >= 0 && arr[j] > key) {
@@ -109,7 +111,8 @@ export const insertionSort: AlgorithmInfo = {
                     array: [...arr], highlights: [j, j + 1], sorted: Array.from({ length: i }, (_, k) => k),
                     description: `arr[${j}] = ${arr[j]} > key = ${key} → Dịch sang phải.`,
                     descriptionEn: `arr[${j}] = ${arr[j]} > key = ${key} → Shift right.`,
-                    codeLine: 5,
+                    codeLine: 6,
+                    codeLines: { js: 6, python: 6, c: 6, cpp: 6 },
                 });
                 j--;
             }
@@ -119,7 +122,8 @@ export const insertionSort: AlgorithmInfo = {
                 array: [...arr], highlights: [j + 1], sorted: Array.from({ length: i + 1 }, (_, k) => k),
                 description: `Chèn key = ${key} vào vị trí ${j + 1}. Mảng: [${arr.join(', ')}]`,
                 descriptionEn: `Insert key = ${key} at position ${j + 1}. Array: [${arr.join(', ')}]`,
-                codeLine: 8,
+                codeLine: 9,
+                codeLines: { js: 9, python: 8, c: 9, cpp: 9 },
             });
         }
 
@@ -127,7 +131,8 @@ export const insertionSort: AlgorithmInfo = {
             array: [...arr], sorted: Array.from({ length: n }, (_, i) => i),
             description: `✅ Sắp xếp hoàn tất! Mảng: [${arr.join(', ')}]`,
             descriptionEn: `✅ Sorting complete! Array: [${arr.join(', ')}]`,
-            codeLine: 10,
+            codeLine: 11,
+            codeLines: { js: 11, python: 9, c: 11, cpp: 11 },
         });
         return steps;
     },

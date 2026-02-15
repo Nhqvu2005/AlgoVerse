@@ -135,6 +135,7 @@ def bfs(graph, start):
             description: `Bắt đầu BFS từ đỉnh ${graph.nodes[0].label}. Thêm vào hàng đợi.`,
             descriptionEn: `Start BFS from node ${graph.nodes[0].label}. Add to queue.`,
             codeLine: 2,
+            codeLines: { js: 60, python: 76, c: 87, cpp: 102 },
         });
 
         while (queue.length > 0) {
@@ -146,6 +147,7 @@ def bfs(graph, start):
                 description: `Lấy đỉnh ${node} từ hàng đợi. Đánh dấu đã thăm. Queue: [${queue.join(', ')}]`,
                 descriptionEn: `Dequeue node ${node}. Mark as visited. Queue: [${queue.join(', ')}]`,
                 codeLine: 5,
+                codeLines: { js: 63, python: 79, c: 90, cpp: 105 },
             });
 
             const neighbors = adj.get(node) || [];
@@ -160,6 +162,7 @@ def bfs(graph, start):
                         description: `Thêm đỉnh ${neighbor} (kề với ${node}) vào hàng đợi. Queue: [${queue.join(', ')}]`,
                         descriptionEn: `Enqueue node ${neighbor} (neighbor of ${node}). Queue: [${queue.join(', ')}]`,
                         codeLine: 9,
+                        codeLines: { js: 67, python: 83, c: 94, cpp: 109 },
                     });
                 }
             }
@@ -170,6 +173,7 @@ def bfs(graph, start):
             description: `✅ BFS hoàn tất! Thứ tự duyệt: [${visited.join(' → ')}]`,
             descriptionEn: `✅ BFS complete! Traversal order: [${visited.join(' → ')}]`,
             codeLine: 13,
+            codeLines: { js: 71, python: 83, c: 98, cpp: 113 },
         });
         return steps;
     },

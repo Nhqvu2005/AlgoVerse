@@ -295,6 +295,7 @@ export default function AlgorithmPage() {
                             code={algo.code}
                             codeLanguages={algo.codeLanguages}
                             activeLine={step.codeLine}
+                            activeLines={step.codeLines}
                         />
 
                         {/* Complexity Info */}

@@ -128,6 +128,7 @@ void mergeSort(vector<int>& arr, int l, int r) {
             description: `Bắt đầu Merge Sort với mảng: [${working.join(', ')}]`,
             descriptionEn: `Starting Merge Sort with array: [${working.join(', ')}]`,
             codeLine: 1,
+            codeLines: { js: 26, python: 62, c: 92, cpp: 112 },
         });
 
         function mergeSortHelper(start: number, end: number) {
@@ -138,6 +139,7 @@ void mergeSort(vector<int>& arr, int l, int r) {
                 description: `Chia [${working.slice(start, end).join(', ')}] thành [${working.slice(start, mid).join(', ')}] và [${working.slice(mid, end).join(', ')}]`,
                 descriptionEn: `Split [${working.slice(start, end).join(', ')}] into [${working.slice(start, mid).join(', ')}] and [${working.slice(mid, end).join(', ')}]`,
                 codeLine: 3,
+                codeLines: { js: 29, python: 66, c: 95, cpp: 115 },
             });
 
             mergeSortHelper(start, mid);
@@ -152,6 +154,7 @@ void mergeSort(vector<int>& arr, int l, int r) {
                 description: `Trộn [${left.join(', ')}] và [${right.join(', ')}]`,
                 descriptionEn: `Merge [${left.join(', ')}] and [${right.join(', ')}]`,
                 codeLine: 9,
+                codeLines: { js: 31, python: 68, c: 97, cpp: 117 },
             });
 
             while (i < left.length && j < right.length) {
@@ -162,6 +165,7 @@ void mergeSort(vector<int>& arr, int l, int r) {
                         description: `${left[i]} ≤ ${right[j]} → Chọn ${left[i]} từ nửa trái`,
                         descriptionEn: `${left[i]} ≤ ${right[j]} → Pick ${left[i]} from left half`,
                         codeLine: 12,
+                        codeLines: { js: 37, python: 73, c: 85, cpp: 105 },
                     });
                     i++;
                 } else {
@@ -171,6 +175,7 @@ void mergeSort(vector<int>& arr, int l, int r) {
                         description: `${right[j]} < ${left[i]} → Chọn ${right[j]} từ nửa phải`,
                         descriptionEn: `${right[j]} < ${left[i]} → Pick ${right[j]} from right half`,
                         codeLine: 14,
+                        codeLines: { js: 39, python: 75, c: 86, cpp: 106 },
                     });
                     j++;
                 }
@@ -185,6 +190,7 @@ void mergeSort(vector<int>& arr, int l, int r) {
                 description: `Kết quả trộn: [${working.slice(start, end).join(', ')}]`,
                 descriptionEn: `Merge result: [${working.slice(start, end).join(', ')}]`,
                 codeLine: 17,
+                codeLines: { js: 43, python: 77, c: 90, cpp: 110 },
             });
         }
 
@@ -195,6 +201,7 @@ void mergeSort(vector<int>& arr, int l, int r) {
             description: `✅ Sắp xếp hoàn tất! Mảng: [${working.join(', ')}]`,
             descriptionEn: `✅ Sorting complete! Array: [${working.join(', ')}]`,
             codeLine: 6,
+            codeLines: { js: 32, python: 68, c: 99, cpp: 119 },
         });
         return steps;
     },

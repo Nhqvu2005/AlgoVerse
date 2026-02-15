@@ -98,6 +98,7 @@ public:
             description: 'Khởi tạo Queue rỗng.',
             descriptionEn: 'Initialize an empty Queue.',
             codeLine: 1,
+            codeLines: { js: 45, python: 54, c: 65, cpp: 80 },
         });
 
         const ops = [
@@ -115,6 +116,7 @@ public:
                     description: `Enqueue ${op.val}. Queue: [${q.join(', ')}]`,
                     descriptionEn: `Enqueue ${op.val}. Queue: [${q.join(', ')}]`,
                     codeLine: 5,
+                    codeLines: { js: 46, python: 56, c: 67, cpp: 82 },
                 });
             } else if (op.type === 'dequeue') {
                 const val = q.shift();
@@ -123,6 +125,7 @@ public:
                     description: `Dequeue ${val} (phần tử đầu). Queue: [${q.join(', ')}]`,
                     descriptionEn: `Dequeue ${val} (front element). Queue: [${q.join(', ')}]`,
                     codeLine: 7,
+                    codeLines: { js: 47, python: 58, c: 71, cpp: 83 },
                 });
             } else if (op.type === 'front') {
                 const val = q[0];
@@ -131,6 +134,7 @@ public:
                     description: `Front: phần tử đầu = ${val}. Queue không thay đổi.`,
                     descriptionEn: `Front: first element = ${val}. Queue unchanged.`,
                     codeLine: 12,
+                    codeLines: { js: 48, python: 60, c: 76, cpp: 88 },
                 });
             }
         }
@@ -140,6 +144,7 @@ public:
             description: `✅ Hoàn tất demo Queue! Queue cuối: [${q.join(', ')}]`,
             descriptionEn: `✅ Queue demo complete! Final queue: [${q.join(', ')}]`,
             codeLine: 17,
+            codeLines: { js: 50, python: 63, c: 78, cpp: 89 },
         });
         return steps;
     },

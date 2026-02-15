@@ -165,6 +165,7 @@ public:
       description: 'Khởi tạo Linked List rỗng.',
       descriptionEn: 'Initialize an empty Linked List.',
       codeLine: 8,
+      codeLines: { js: 65, python: 87, c: 102, cpp: 134 },
     });
 
     // Insert at head: 10, 20, 30
@@ -179,6 +180,7 @@ public:
         description: `Chèn ${val} vào đầu. List: ${list.map(n => n.value).join(' → ')} → null`,
         descriptionEn: `Insert ${val} at head. List: ${list.map(n => n.value).join(' → ')} → null`,
         codeLine: 10,
+        codeLines: { js: 66, python: 89, c: 107, cpp: 137 },
       });
     }
 
@@ -192,6 +194,7 @@ public:
       description: `Chèn ${tailVal} vào cuối. List: ${list.map(n => n.value).join(' → ')} → null`,
       descriptionEn: `Insert ${tailVal} at tail. List: ${list.map(n => n.value).join(' → ')} → null`,
       codeLine: 16,
+      codeLines: { js: 66, python: 89, c: 107, cpp: 137 },
     });
 
     // Delete 20
@@ -204,6 +207,7 @@ public:
         description: `Tìm và xóa node ${delVal}.`,
         descriptionEn: `Find and delete node ${delVal}.`,
         codeLine: 22,
+        codeLines: { js: 71, python: 93, c: 114, cpp: 142 },
       });
       list = list.filter(n => n.value !== delVal);
       for (let i = 0; i < list.length; i++) { list[i].next = i < list.length - 1 ? i + 1 : undefined; list[i].isNew = false; }
@@ -212,6 +216,7 @@ public:
         description: `Đã xóa ${delVal}. List: ${list.map(n => n.value).join(' → ')} → null`,
         descriptionEn: `Deleted ${delVal}. List: ${list.map(n => n.value).join(' → ')} → null`,
         codeLine: 29,
+        codeLines: { js: 79, python: 101, c: 126, cpp: 156 },
       });
     }
 
@@ -220,6 +225,7 @@ public:
       description: `✅ Hoàn tất demo! List cuối: ${list.map(n => n.value).join(' → ')} → null`,
       descriptionEn: `✅ Demo complete! Final list: ${list.map(n => n.value).join(' → ')} → null`,
       codeLine: 30,
+      codeLines: { js: 80, python: 101, c: 127, cpp: 157 },
     });
     return steps;
   },

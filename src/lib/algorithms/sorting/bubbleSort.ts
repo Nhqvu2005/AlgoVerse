@@ -87,6 +87,7 @@ export const bubbleSort: AlgorithmInfo = {
             description: `Bắt đầu với mảng: [${arr.join(', ')}]. Bubble Sort sẽ so sánh từng cặp phần tử liền kề.`,
             descriptionEn: `Starting with array: [${arr.join(', ')}]. Bubble Sort will compare each pair of adjacent elements.`,
             codeLine: 1,
+            codeLines: { js: 1, python: 1, c: 1, cpp: 1 },
         });
 
         for (let i = 0; i < n - 1; i++) {
@@ -95,7 +96,8 @@ export const bubbleSort: AlgorithmInfo = {
                     array: [...arr], highlights: [j, j + 1], sorted: [...sorted],
                     description: `So sánh arr[${j}] = ${arr[j]} với arr[${j + 1}] = ${arr[j + 1]}`,
                     descriptionEn: `Compare arr[${j}] = ${arr[j]} with arr[${j + 1}] = ${arr[j + 1]}`,
-                    codeLine: 4,
+                    codeLine: 5,
+                    codeLines: { js: 5, python: 5, c: 4, cpp: 4 },
                 });
 
                 if (arr[j] > arr[j + 1]) {
@@ -104,14 +106,16 @@ export const bubbleSort: AlgorithmInfo = {
                         array: [...arr], highlights: [j, j + 1], swapping: [j, j + 1], sorted: [...sorted],
                         description: `${arr[j + 1]} > ${arr[j]} → Hoán đổi! Mảng: [${arr.join(', ')}]`,
                         descriptionEn: `${arr[j + 1]} > ${arr[j]} → Swap! Array: [${arr.join(', ')}]`,
-                        codeLine: 6,
+                        codeLine: 7,
+                        codeLines: { js: 7, python: 6, c: 5, cpp: 5 },
                     });
                 } else {
                     steps.push({
                         array: [...arr], highlights: [j, j + 1], sorted: [...sorted],
                         description: `${arr[j]} ≤ ${arr[j + 1]} → Không cần hoán đổi.`,
                         descriptionEn: `${arr[j]} ≤ ${arr[j + 1]} → No swap needed.`,
-                        codeLine: 4,
+                        codeLine: 5,
+                        codeLines: { js: 5, python: 5, c: 4, cpp: 4 },
                     });
                 }
             }
@@ -121,6 +125,7 @@ export const bubbleSort: AlgorithmInfo = {
                 description: `Lượt ${i + 1} hoàn thành! Phần tử ${arr[n - 1 - i]} đã ở đúng vị trí.`,
                 descriptionEn: `Pass ${i + 1} complete! Element ${arr[n - 1 - i]} is now in its correct position.`,
                 codeLine: 3,
+                codeLines: { js: 3, python: 3, c: 2, cpp: 2 },
             });
         }
 
@@ -129,7 +134,8 @@ export const bubbleSort: AlgorithmInfo = {
             array: [...arr], sorted: Array.from({ length: n }, (_, i) => i),
             description: `✅ Sắp xếp hoàn tất! Mảng: [${arr.join(', ')}]`,
             descriptionEn: `✅ Sorting complete! Array: [${arr.join(', ')}]`,
-            codeLine: 9,
+            codeLine: 10,
+            codeLines: { js: 10, python: 7, c: 9, cpp: 9 },
         });
 
         return steps;

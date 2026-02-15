@@ -84,21 +84,24 @@ export const linearSearch: AlgorithmInfo = {
             description: `Tìm kiếm giá trị ${target} trong mảng [${arr.join(', ')}]. Duyệt từ đầu đến cuối.`,
             descriptionEn: `Search for value ${target} in array [${arr.join(', ')}]. Scan from start to end.`,
             codeLine: 1,
+            codeLines: { js: 1, python: 1, c: 1, cpp: 1 },
         });
 
         for (let i = 0; i < arr.length; i++) {
             steps.push({
                 array: [...arr], highlights: [i], searchTarget: target,
-                description: `Kiểm tra arr[${i}] = ${arr[i]}. ${arr[i]} ${arr[i] === target ? '=' : '≠'} ${target}`,
-                descriptionEn: `Check arr[${i}] = ${arr[i]}. ${arr[i]} ${arr[i] === target ? '=' : '≠'} ${target}`,
-                codeLine: 2,
+                description: `So sánh arr[${i}] = ${arr[i]} với ${target}`,
+                descriptionEn: `Compare arr[${i}] = ${arr[i]} with ${target}`,
+                codeLine: 3,
+                codeLines: { js: 3, python: 3, c: 2, cpp: 2 },
             });
             if (arr[i] === target) {
                 steps.push({
                     array: [...arr], highlights: [i], found: i, searchTarget: target,
-                    description: `✅ Tìm thấy ${target} tại vị trí ${i}!`,
-                    descriptionEn: `✅ Found ${target} at index ${i}!`,
-                    codeLine: 3,
+                    description: `Tìm thấy ${target} tại vị trí ${i}!`,
+                    descriptionEn: `Found ${target} at index ${i}!`,
+                    codeLine: 4,
+                    codeLines: { js: 4, python: 4, c: 3, cpp: 3 },
                 });
                 return steps;
             }

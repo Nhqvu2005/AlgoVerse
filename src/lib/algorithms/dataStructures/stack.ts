@@ -96,6 +96,7 @@ public:
             description: 'Khởi tạo Stack rỗng.',
             descriptionEn: 'Initialize an empty Stack.',
             codeLine: 1,
+            codeLines: { js: 45, python: 52, c: 63, cpp: 78 },
         });
 
         const ops = [
@@ -113,6 +114,7 @@ public:
                     description: `Push ${op.val} vào stack. Stack: [${st.join(', ')}]`,
                     descriptionEn: `Push ${op.val} onto stack. Stack: [${st.join(', ')}]`,
                     codeLine: 5,
+                    codeLines: { js: 46, python: 54, c: 65, cpp: 80 },
                 });
             } else if (op.type === 'pop') {
                 const val = st.pop();
@@ -121,6 +123,7 @@ public:
                     description: `Pop ${val} từ stack. Stack: [${st.join(', ')}]`,
                     descriptionEn: `Pop ${val} from stack. Stack: [${st.join(', ')}]`,
                     codeLine: 7,
+                    codeLines: { js: 47, python: 56, c: 69, cpp: 81 },
                 });
             } else if (op.type === 'peek') {
                 const val = st[st.length - 1];
@@ -129,6 +132,7 @@ public:
                     description: `Peek: phần tử đỉnh = ${val}. Stack không thay đổi.`,
                     descriptionEn: `Peek: top element = ${val}. Stack unchanged.`,
                     codeLine: 11,
+                    codeLines: { js: 48, python: 58, c: 74, cpp: 86 },
                 });
             }
         }
@@ -138,6 +142,7 @@ public:
             description: `✅ Hoàn tất demo Stack! Stack cuối: [${st.join(', ')}]`,
             descriptionEn: `✅ Stack demo complete! Final stack: [${st.join(', ')}]`,
             codeLine: 17,
+            codeLines: { js: 50, python: 61, c: 76, cpp: 87 },
         });
         return steps;
     },

@@ -29,7 +29,8 @@ export interface AlgorithmStep {
 
     description: string;             // Vietnamese explanation of this step
     descriptionEn?: string;          // English explanation of this step
-    codeLine?: number;               // highlighted line in code display
+    codeLine?: number;               // highlighted line in code display (fallback/legacy)
+    codeLines?: { [key in CodeLanguage]?: number }; // highlighted line per language
 }
 
 export interface GraphData {

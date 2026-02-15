@@ -8,6 +8,7 @@ interface CodeDisplayProps {
     code: string;
     codeLanguages?: CodeLanguages;
     activeLine?: number;
+    activeLines?: { [key in CodeLanguage]?: number };
 }
 
 const langLabels: Record<CodeLanguage, string> = {
@@ -24,7 +25,7 @@ const langFileNames: Record<CodeLanguage, string> = {
     cpp: 'algorithm.cpp',
 };
 
-export default function CodeDisplay({ code, codeLanguages, activeLine }: CodeDisplayProps) {
+export default function CodeDisplay({ code, codeLanguages, activeLine, activeLines }: CodeDisplayProps) {
     const [lang, setLang] = useState<CodeLanguage>('js');
     const [copied, setCopied] = useState(false);
     const { t } = useLanguage();
@@ -114,7 +115,13 @@ export default function CodeDisplay({ code, codeLanguages, activeLine }: CodeDis
                     <tbody>
                         {lines.map((line, i) => {
                             const lineNum = i + 1;
-                            const isActive = lang === 'js' && activeLine === lineNum;
+                            let isActive = false;
+
+                            if (activeLines && activeLines[lang] !== undefined) {
+                                isActive = activeLines[lang] === lineNum;
+                            } else if (lang === 'js' && activeLine !== undefined) {
+                                isActive = activeLine === lineNum;
+                            }
                             return (
                                 <tr
                                     key={i}

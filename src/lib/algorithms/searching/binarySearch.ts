@@ -98,9 +98,10 @@ export const binarySearch: AlgorithmInfo = {
 
         steps.push({
             array: [...arr], searchTarget: target,
-            description: `Tìm kiếm ${target} trong mảng đã sắp xếp: [${arr.join(', ')}]`,
-            descriptionEn: `Search for ${target} in sorted array: [${arr.join(', ')}]`,
+            description: `Bắt đầu Binary Search: target = ${target}, mảng [${arr.join(', ')}]`,
+            descriptionEn: `Start Binary Search: target = ${target}, array [${arr.join(', ')}]`,
             codeLine: 1,
+            codeLines: { js: 1, python: 1, c: 1, cpp: 1 },
         });
 
         let low = 0, high = arr.length - 1;
@@ -110,33 +111,37 @@ export const binarySearch: AlgorithmInfo = {
 
             steps.push({
                 array: [...arr], highlights: [mid], low, high, mid, searchTarget: target,
-                description: `low=${low}, high=${high}, mid=${mid}. arr[${mid}] = ${arr[mid]}`,
-                descriptionEn: `low=${low}, high=${high}, mid=${mid}. arr[${mid}] = ${arr[mid]}`,
-                codeLine: 3,
+                description: `low = ${low}, high = ${high}. Tính mid = floor((${low} + ${high}) / 2) = ${mid}. Giá trị arr[${mid}] = ${arr[mid]}`,
+                descriptionEn: `low = ${low}, high = ${high}. Calc mid = floor((${low} + ${high}) / 2) = ${mid}. Value arr[${mid}] = ${arr[mid]}`,
+                codeLine: 5,
+                codeLines: { js: 5, python: 5, c: 5, cpp: 5 },
             });
 
             if (arr[mid] === target) {
                 steps.push({
                     array: [...arr], found: mid, highlights: [mid], low, high, mid, searchTarget: target,
-                    description: `✅ arr[${mid}] = ${arr[mid]} = target. Tìm thấy tại vị trí ${mid}!`,
-                    descriptionEn: `✅ arr[${mid}] = ${arr[mid]} = target. Found at index ${mid}!`,
-                    codeLine: 4,
+                    description: `arr[${mid}] (${arr[mid]}) == target (${target}) → Đã tìm thấy!`,
+                    descriptionEn: `arr[${mid}] (${arr[mid]}) == target (${target}) → Found!`,
+                    codeLine: 6,
+                    codeLines: { js: 6, python: 7, c: 6, cpp: 6 },
                 });
                 return steps;
             } else if (arr[mid] < target) {
                 steps.push({
                     array: [...arr], highlights: [mid], low, high, mid, searchTarget: target,
-                    description: `arr[${mid}] = ${arr[mid]} < ${target} → Tìm nửa phải. low = ${mid + 1}`,
-                    descriptionEn: `arr[${mid}] = ${arr[mid]} < ${target} → Search right half. low = ${mid + 1}`,
-                    codeLine: 5,
+                    description: `arr[${mid}] (${arr[mid]}) < target (${target}) → Tìm ở nửa phải (low = mid + 1 = ${mid + 1})`,
+                    descriptionEn: `arr[${mid}] (${arr[mid]}) < target (${target}) → Search right half (low = mid + 1 = ${mid + 1})`,
+                    codeLine: 8,
+                    codeLines: { js: 8, python: 9, c: 8, cpp: 8 },
                 });
                 low = mid + 1;
             } else {
                 steps.push({
                     array: [...arr], highlights: [mid], low, high, mid, searchTarget: target,
-                    description: `arr[${mid}] = ${arr[mid]} > ${target} → Tìm nửa trái. high = ${mid - 1}`,
-                    descriptionEn: `arr[${mid}] = ${arr[mid]} > ${target} → Search left half. high = ${mid - 1}`,
-                    codeLine: 6,
+                    description: `arr[${mid}] (${arr[mid]}) > target (${target}) → Tìm ở nửa trái (high = mid - 1 = ${mid - 1})`,
+                    descriptionEn: `arr[${mid}] (${arr[mid]}) > target (${target}) → Search left half (high = mid - 1 = ${mid - 1})`,
+                    codeLine: 10,
+                    codeLines: { js: 10, python: 11, c: 10, cpp: 10 },
                 });
                 high = mid - 1;
             }
@@ -144,9 +149,10 @@ export const binarySearch: AlgorithmInfo = {
 
         steps.push({
             array: [...arr], searchTarget: target,
-            description: `❌ Không tìm thấy ${target}. low > high → Trả về -1.`,
-            descriptionEn: `❌ ${target} not found. low > high → Return -1.`,
-            codeLine: 8,
+            description: `Không tìm thấy ${target} (low > high).`,
+            descriptionEn: `Target ${target} not found (low > high).`,
+            codeLine: 13,
+            codeLines: { js: 13, python: 13, c: 13, cpp: 13 },
         });
         return steps;
     },

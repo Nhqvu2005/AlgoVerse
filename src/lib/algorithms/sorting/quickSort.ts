@@ -127,6 +127,7 @@ void quickSort(vector<int>& arr, int low, int high) {
             description: `Bắt đầu Quick Sort với mảng: [${arr.join(', ')}]`,
             descriptionEn: `Starting Quick Sort with array: [${arr.join(', ')}]`,
             codeLine: 1,
+            codeLines: { js: 26, python: 66, c: 93, cpp: 112 },
         });
 
         function qs(low: number, high: number) {
@@ -137,6 +138,7 @@ void quickSort(vector<int>& arr, int low, int high) {
                     description: `Phân hoạch [${arr.slice(low, high + 1).join(', ')}], pivot = ${pivotVal} (vị trí ${high})`,
                     descriptionEn: `Partition [${arr.slice(low, high + 1).join(', ')}], pivot = ${pivotVal} (position ${high})`,
                     codeLine: 9,
+                    codeLines: { js: 28, python: 68, c: 95, cpp: 114 },
                 });
 
                 let i = low - 1;
@@ -146,6 +148,7 @@ void quickSort(vector<int>& arr, int low, int high) {
                         description: `So sánh arr[${j}] = ${arr[j]} với pivot = ${pivotVal}`,
                         descriptionEn: `Compare arr[${j}] = ${arr[j]} with pivot = ${pivotVal}`,
                         codeLine: 12,
+                        codeLines: { js: 38, python: 76, c: 84, cpp: 103 },
                     });
                     if (arr[j] < pivotVal) {
                         i++;
@@ -155,6 +158,7 @@ void quickSort(vector<int>& arr, int low, int high) {
                             description: `${arr[i]} < pivot → Hoán đổi arr[${i}] và arr[${j}]`,
                             descriptionEn: `${arr[i]} < pivot → Swap arr[${i}] and arr[${j}]`,
                             codeLine: 14,
+                            codeLines: { js: 40, python: 78, c: 86, cpp: 105 },
                         });
                     }
                 }
@@ -168,6 +172,7 @@ void quickSort(vector<int>& arr, int low, int high) {
                     description: `Đặt pivot ${arr[pi]} vào vị trí ${pi}. Pivot đã ở đúng chỗ!`,
                     descriptionEn: `Place pivot ${arr[pi]} at position ${pi}. Pivot is in correct place!`,
                     codeLine: 17,
+                    codeLines: { js: 43, python: 79, c: 89, cpp: 108 },
                 });
 
                 qs(low, pi - 1);
@@ -184,6 +189,7 @@ void quickSort(vector<int>& arr, int low, int high) {
             description: `✅ Sắp xếp hoàn tất! Mảng: [${arr.join(', ')}]`,
             descriptionEn: `✅ Sorting complete! Array: [${arr.join(', ')}]`,
             codeLine: 5,
+            codeLines: { js: 32, python: 70, c: 99, cpp: 118 },
         });
         return steps;
     },

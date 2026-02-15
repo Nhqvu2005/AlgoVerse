@@ -130,6 +130,7 @@ export const dfs: AlgorithmInfo = {
             description: `Bắt đầu DFS từ đỉnh ${graph.nodes[0].label}. Đẩy vào stack.`,
             descriptionEn: `Start DFS from node ${graph.nodes[0].label}. Push onto stack.`,
             codeLine: 2,
+            codeLines: { js: 60, python: 73, c: 85, cpp: 99 },
         });
 
         while (stack.length > 0) {
@@ -144,6 +145,7 @@ export const dfs: AlgorithmInfo = {
                 description: `Pop đỉnh ${node} từ stack. Đánh dấu đã thăm. Stack: [${stack.join(', ')}]`,
                 descriptionEn: `Pop node ${node} from stack. Mark as visited. Stack: [${stack.join(', ')}]`,
                 codeLine: 4,
+                codeLines: { js: 62, python: 75, c: 87, cpp: 101 },
             });
 
             const neighbors = (adj.get(node) || []).slice().reverse();
@@ -157,6 +159,7 @@ export const dfs: AlgorithmInfo = {
                         description: `Đẩy đỉnh ${neighbor} (kề với ${node}) vào stack. Stack: [${stack.join(', ')}]`,
                         descriptionEn: `Push node ${neighbor} (neighbor of ${node}) onto stack. Stack: [${stack.join(', ')}]`,
                         codeLine: 9,
+                        codeLines: { js: 67, python: 81, c: 92, cpp: 106 },
                     });
                 }
             }
@@ -167,6 +170,7 @@ export const dfs: AlgorithmInfo = {
             description: `✅ DFS hoàn tất! Thứ tự duyệt: [${visited.join(' → ')}]`,
             descriptionEn: `✅ DFS complete! Traversal order: [${visited.join(' → ')}]`,
             codeLine: 14,
+            codeLines: { js: 70, python: 81, c: 95, cpp: 109 },
         });
         return steps;
     },
