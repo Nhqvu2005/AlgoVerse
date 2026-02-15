@@ -12,6 +12,12 @@ import { stack } from './algorithms/dataStructures/stack';
 import { queue } from './algorithms/dataStructures/queue';
 import { linkedList } from './algorithms/dataStructures/linkedList';
 import { binaryTree } from './algorithms/dataStructures/binaryTree';
+import { arrays } from './algorithms/basics/arrays';
+import { loops } from './algorithms/basics/loops';
+import { conditionals } from './algorithms/basics/conditionals';
+import { heap } from './algorithms/dataStructures/heap';
+import { hashTable } from './algorithms/dataStructures/hashTable';
+import { avlTree } from './algorithms/dataStructures/avlTree';
 
 export const algorithms: AlgorithmInfo[] = [
     bubbleSort,
@@ -26,7 +32,14 @@ export const algorithms: AlgorithmInfo[] = [
     stack,
     queue,
     linkedList,
+    linkedList,
     binaryTree,
+    arrays,
+    loops,
+    conditionals,
+    heap,
+    hashTable,
+    avlTree,
 ];
 
 export function getAlgorithmBySlug(slug: string): AlgorithmInfo | undefined {

@@ -9,6 +9,8 @@ import CodeDisplay from '@/components/CodeDisplay';
 import ArrayVisualizer from '@/components/visualizers/ArrayVisualizer';
 import GraphVisualizer from '@/components/visualizers/GraphVisualizer';
 import DataStructureVisualizer from '@/components/visualizers/DataStructureVisualizer';
+import ConceptVisualizer from '@/components/visualizers/ConceptVisualizer';
+import HashTableVisualizer from '@/components/visualizers/HashTableVisualizer';
 import { getAlgorithmBySlug } from '@/lib/algorithmRegistry';
 import { AlgorithmStep, GraphData, categoryConfig } from '@/lib/types';
 import { useLanguage } from '@/lib/LanguageContext';
@@ -134,11 +136,19 @@ export default function AlgorithmPage() {
         } else if (algo.category === 'graph') {
             return <GraphVisualizer step={step} />;
         } else if (algo.category === 'data-structure') {
+            if (algo.slug === 'hash-table') {
+                return <HashTableVisualizer step={step} />;
+            }
             const dsType = algo.slug === 'stack' ? 'stack'
                 : algo.slug === 'queue' ? 'queue'
                     : algo.slug === 'linked-list' ? 'linkedList'
                         : 'tree';
             return <DataStructureVisualizer step={step} type={dsType} />;
+        } else if (algo.category === 'concept') {
+            if (algo.slug === 'arrays') {
+                return <ArrayVisualizer step={step} />;
+            }
+            return <ConceptVisualizer step={step} />;
         }
         return null;
     };

@@ -31,6 +31,8 @@ export interface AlgorithmStep {
     descriptionEn?: string;          // English explanation of this step
     codeLine?: number;               // highlighted line in code display (fallback/legacy)
     codeLines?: { [key in CodeLanguage]?: number }; // highlighted line per language
+    variables?: { [key: string]: string | number | boolean }; // step-specific variable state
+    hashTable?: { index: number; content: string }[]; // simplified hash table state
 }
 
 export interface GraphData {
@@ -83,7 +85,7 @@ export interface AlgorithmInfo {
     slug: string;
     name: string;
     nameVi: string;
-    category: 'sorting' | 'searching' | 'graph' | 'data-structure';
+    category: 'sorting' | 'searching' | 'graph' | 'data-structure' | 'concept';
     categoryVi: string;
     description: string;
     descriptionEn?: string;
@@ -105,4 +107,5 @@ export const categoryConfig = {
     searching: { label: 'Tìm kiếm', color: 'pink', icon: '🔍' },
     graph: { label: 'Đồ thị', color: 'cyan', icon: '🕸️' },
     'data-structure': { label: 'Cấu trúc DL', color: 'green', icon: '📦' },
+    concept: { label: 'Cơ bản', color: 'orange', icon: '💡' },
 } as const;
