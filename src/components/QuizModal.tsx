@@ -7,9 +7,10 @@ import { useLanguage } from '@/lib/LanguageContext';
 interface QuizModalProps {
     quiz: Quiz;
     onClose: () => void;
+    onComplete?: (score: number, total: number) => void;
 }
 
-export default function QuizModal({ quiz, onClose }: QuizModalProps) {
+export default function QuizModal({ quiz, onClose, onComplete }: QuizModalProps) {
     const { locale } = useLanguage();
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
@@ -40,6 +41,9 @@ export default function QuizModal({ quiz, onClose }: QuizModalProps) {
             setAnswered(false);
         } else {
             setShowResult(true);
+            if (onComplete) {
+                onComplete(score, quiz.questions.length);
+            }
         }
     };
 

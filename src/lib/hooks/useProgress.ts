@@ -58,30 +58,42 @@ export function useProgress(totalAlgorithms: number = 21) {
         setProgress(data);
     }, []);
 
-    // Mark algorithm as completed (viewed all steps)
+    // Mark algorithm as completed (passed quiz with 100%)
     const markCompleted = useCallback((slug: string) => {
-        const newProgress = {
-            ...progress,
-            completedAlgorithms: progress.completedAlgorithms.includes(slug)
-                ? progress.completedAlgorithms
-                : [...progress.completedAlgorithms, slug],
-            lastVisited: slug,
-            totalVisits: progress.totalVisits + 1,
-        };
-        saveProgress(newProgress);
-    }, [progress, saveProgress]);
+        setProgress(prev => {
+            if (prev.completedAlgorithms.includes(slug)) {
+                return prev;
+            }
+            const newProgress = {
+                ...prev,
+                completedAlgorithms: [...prev.completedAlgorithms, slug],
+                lastVisited: slug,
+                totalVisits: prev.totalVisits + 1,
+            };
+            // Save to localStorage
+            if (typeof window !== 'undefined') {
+                localStorage.setItem(STORAGE_KEYS.PROGRESS, JSON.stringify(newProgress));
+            }
+            return newProgress;
+        });
+    }, []);
 
     // Save quiz score
     const saveQuizScore = useCallback((slug: string, score: number) => {
-        const newProgress = {
-            ...progress,
-            quizScores: {
-                ...progress.quizScores,
-                [slug]: score,
-            },
-        };
-        saveProgress(newProgress);
-    }, [progress, saveProgress]);
+        setProgress(prev => {
+            const newProgress = {
+                ...prev,
+                quizScores: {
+                    ...prev.quizScores,
+                    [slug]: score,
+                },
+            };
+            if (typeof window !== 'undefined') {
+                localStorage.setItem(STORAGE_KEYS.PROGRESS, JSON.stringify(newProgress));
+            }
+            return newProgress;
+        });
+    }, []);
 
     // Toggle bookmark
     const toggleBookmark = useCallback((slug: string) => {

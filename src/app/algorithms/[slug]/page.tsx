@@ -24,7 +24,7 @@ export default function AlgorithmPage() {
     const slug = params.slug as string;
     const algo = getAlgorithmBySlug(slug);
     const { t, locale } = useLanguage();
-    const { markCompleted, isBookmarked, toggleBookmark } = useProgress();
+    const { markCompleted, isBookmarked, toggleBookmark, saveQuizScore, isCompleted } = useProgress();
 
     const [steps, setSteps] = useState<AlgorithmStep[]>([]);
     const [currentStep, setCurrentStep] = useState(0);
@@ -119,12 +119,6 @@ export default function AlgorithmPage() {
         };
     }, [isPlaying, speed, steps.length]);
 
-    // Mark algorithm as completed when user reaches the end
-    useEffect(() => {
-        if (steps.length > 0 && currentStep === steps.length - 1 && slug) {
-            markCompleted(slug);
-        }
-    }, [currentStep, steps.length, slug, markCompleted]);
 
     if (!algo) {
         return (
@@ -419,7 +413,17 @@ export default function AlgorithmPage() {
 
             {/* Quiz Modal */}
             {showQuiz && quiz && (
-                <QuizModal quiz={quiz} onClose={() => setShowQuiz(false)} />
+                <QuizModal
+                    quiz={quiz}
+                    onClose={() => setShowQuiz(false)}
+                    onComplete={(score, total) => {
+                        const percentage = Math.round((score / total) * 100);
+                        if (percentage === 100 && slug) {
+                            markCompleted(slug);
+                        }
+                        saveQuizScore(slug, percentage);
+                    }}
+                />
             )}
         </>
     );
