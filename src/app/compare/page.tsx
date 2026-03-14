@@ -167,7 +167,7 @@ export default function ComparePage() {
         // For other types, create a step object with the input
         const defaultStep: AlgorithmStep = {
             array: input,
-            highlight: [],
+            highlights: [],
             sorted: [],
             description: '',
         };

@@ -116,11 +116,11 @@ export interface AlgorithmInfo {
 }
 
 export const categoryConfig = {
-    sorting: { label: 'Sắp xếp', color: 'purple', icon: '⚡' },
-    searching: { label: 'Tìm kiếm', color: 'pink', icon: '🔍' },
-    graph: { label: 'Đồ thị', color: 'cyan', icon: '🕸️' },
-    'data-structure': { label: 'Cấu trúc DL', color: 'green', icon: '📦' },
-    concept: { label: 'Cơ bản', color: 'orange', icon: '💡' },
+    sorting: { label: 'Sắp xếp', labelEn: 'Sorting', color: 'purple', icon: '⚡' },
+    searching: { label: 'Tìm kiếm', labelEn: 'Searching', color: 'pink', icon: '🔍' },
+    graph: { label: 'Đồ thị', labelEn: 'Graph', color: 'cyan', icon: '🕸️' },
+    'data-structure': { label: 'Cấu trúc DL', labelEn: 'Data Structure', color: 'green', icon: '📦' },
+    concept: { label: 'Cơ bản', labelEn: 'Concept', color: 'orange', icon: '💡' },
 } as const;
 
 export const difficultyConfig = {
