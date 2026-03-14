@@ -4,11 +4,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useTheme } from '@/lib/ThemeContext';
 
 export default function Navbar() {
     const pathname = usePathname();
     const [mobileOpen, setMobileOpen] = useState(false);
     const { t, toggleLocale } = useLanguage();
+    const { theme, toggleTheme } = useTheme();
 
     const isHome = pathname === '/';
 
@@ -54,6 +56,17 @@ export default function Navbar() {
                             🌐 {t.langToggle}
                         </button>
 
+                        {/* Theme Toggle */}
+                        <button
+                            onClick={toggleTheme}
+                            className="px-3 py-1.5 rounded-lg text-xs font-bold border border-white/10 bg-surface/50
+                         hover:border-primary/40 hover:bg-primary/10 text-text-secondary hover:text-white
+                         transition-all duration-200"
+                            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                        >
+                            {theme === 'dark' ? '☀️' : '🌙'}
+                        </button>
+
                         <a
                             href="https://github.com/Nhqvu2005"
                             target="_blank"
@@ -75,6 +88,13 @@ export default function Navbar() {
                          text-text-secondary transition-all duration-200"
                         >
                             🌐 {t.langToggle}
+                        </button>
+                        <button
+                            onClick={toggleTheme}
+                            className="px-2.5 py-1 rounded-lg text-xs font-bold border border-white/10 bg-surface/50
+                         text-text-secondary transition-all duration-200"
+                        >
+                            {theme === 'dark' ? '☀️' : '🌙'}
                         </button>
                         <button
                             className="btn-icon"

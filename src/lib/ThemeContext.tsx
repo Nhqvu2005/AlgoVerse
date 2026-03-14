@@ -1,21 +1,45 @@
 'use client';
 
-import { createContext, useContext, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 
-// Theme context - currently dark mode only
+type Theme = 'dark' | 'light';
+
 interface ThemeContextType {
-    theme: 'dark';
-    isDark: boolean;
+    theme: Theme;
+    toggleTheme: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType>({
     theme: 'dark',
-    isDark: true,
+    toggleTheme: () => { },
 });
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
+    const [theme, setTheme] = useState<Theme>('dark');
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+        const savedTheme = localStorage.getItem('algoverse_theme') as Theme;
+        if (savedTheme) {
+            setTheme(savedTheme);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (mounted) {
+            localStorage.setItem('algoverse_theme', theme);
+            document.documentElement.classList.remove('dark', 'light');
+            document.documentElement.classList.add(theme);
+        }
+    }, [theme, mounted]);
+
+    const toggleTheme = useCallback(() => {
+        setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+    }, []);
+
     return (
-        <ThemeContext.Provider value={{ theme: 'dark', isDark: true }}>
+        <ThemeContext.Provider value={{ theme, toggleTheme }}>
             {children}
         </ThemeContext.Provider>
     );

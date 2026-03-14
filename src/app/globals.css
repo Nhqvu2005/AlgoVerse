@@ -39,6 +39,62 @@
   body {
     @apply bg-dark text-text-primary font-body antialiased;
     overflow-x: hidden;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  /* Light mode body styles */
+  .light body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  /* Apply CSS variables for light mode */
+  .light {
+    --tw-bg-opacity: 1;
+    background-color: var(--color-bg);
+  }
+
+  .light .glass {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .light .text-text-primary {
+    color: var(--color-text);
+  }
+
+  .light .text-text-secondary {
+    color: var(--color-text-secondary);
+  }
+
+  .light .text-text-muted {
+    color: var(--color-text-muted);
+  }
+
+  .light .text-white {
+    color: #1E293B;
+  }
+
+  .light .bg-dark {
+    background-color: var(--color-bg);
+  }
+
+  .light .bg-darker {
+    background-color: var(--color-bg-darker);
+  }
+
+  .light .bg-surface {
+    background-color: var(--color-surface);
+  }
+
+  .light .bg-surface-light {
+    background-color: var(--color-surface-light);
+  }
+
+  .light .border-white\/5,
+  .light .border-white\/10 {
+    border-color: rgba(0, 0, 0, 0.1);
   }
 
   ::-webkit-scrollbar {
