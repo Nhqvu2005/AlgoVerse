@@ -142,7 +142,7 @@ export default function HomePage() {
                     : 'bg-surface/50 text-text-secondary border border-white/5 hover:border-white/20 hover:text-white'
                     }`}
                 >
-                  {diff === 'all' ? '🎯 Tất cả cấp độ' : `${diffConf.icon} ${locale === 'vi' ? diffConf.label : diffConf.labelEn}`}
+                  {diff === 'all' ? `🎯 ${t.catalog.allDifficulties}` : `${diffConf.icon} ${locale === 'vi' ? diffConf.label : diffConf.labelEn}`}
                 </button>
               );
             })}

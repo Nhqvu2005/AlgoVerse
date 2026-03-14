@@ -24,6 +24,7 @@ export const translations = {
             subtitle: 'Chọn một thuật toán để xem mô phỏng trực quan',
             searchPlaceholder: 'Tìm thuật toán...',
             allCategories: 'Tất cả',
+            allDifficulties: 'Tất cả cấp độ',
             noResults: 'Không tìm thấy thuật toán nào.',
         },
 
@@ -95,6 +96,7 @@ export const translations = {
             subtitle: 'Choose an algorithm to see the interactive visualization',
             searchPlaceholder: 'Search algorithms...',
             allCategories: 'All',
+            allDifficulties: 'All Levels',
             noResults: 'No algorithms found.',
         },
 
@@ -161,6 +163,7 @@ export interface TranslationStrings {
         subtitle: string;
         searchPlaceholder: string;
         allCategories: string;
+        allDifficulties: string;
         noResults: string;
     };
     categories: Record<string, string>;
