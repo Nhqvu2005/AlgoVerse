@@ -16,7 +16,7 @@ export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [activeDifficulty, setActiveDifficulty] = useState<string>('all');
   const { t, locale } = useLanguage();
-  const { stats, isCompleted, isBookmarked, toggleBookmark } = useProgress(algorithms.length);
+  const { stats, isCompleted } = useProgress(algorithms.length);
 
   const filtered = algorithms.filter(algo => {
     const matchSearch = algo.name.toLowerCase().includes(search.toLowerCase()) ||
