@@ -12,7 +12,9 @@ import DataStructureVisualizer from '@/components/visualizers/DataStructureVisua
 import ConceptVisualizer from '@/components/visualizers/ConceptVisualizer';
 import HashTableVisualizer from '@/components/visualizers/HashTableVisualizer';
 import TrieVisualizer from '@/components/visualizers/TrieVisualizer';
+import QuizModal from '@/components/QuizModal';
 import { getAlgorithmBySlug } from '@/lib/algorithmRegistry';
+import { getQuizBySlug } from '@/lib/quiz';
 import { AlgorithmStep, GraphData, categoryConfig } from '@/lib/types';
 import { useLanguage } from '@/lib/LanguageContext';
 
@@ -30,7 +32,10 @@ export default function AlgorithmPage() {
     const [customTarget, setCustomTarget] = useState('');
     const [graphNodes, setGraphNodes] = useState('');
     const [graphEdges, setGraphEdges] = useState('');
+    const [showQuiz, setShowQuiz] = useState(false);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+    const quiz = slug ? getQuizBySlug(slug) : undefined;
 
     const initSteps = useCallback(() => {
         if (!algo) return;
@@ -182,6 +187,14 @@ export default function AlgorithmPage() {
                             <span className={`badge-${catConf.color}`}>
                                 {catConf.icon} {t.categories[algo.category] || catConf.label}
                             </span>
+                            {quiz && (
+                                <button
+                                    onClick={() => setShowQuiz(true)}
+                                    className="px-4 py-2 rounded-lg text-sm font-medium bg-secondary/20 text-secondary border border-secondary/40 hover:bg-secondary/30 transition-all"
+                                >
+                                    📝 {locale === 'vi' ? 'Làm Quiz' : 'Take Quiz'}
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -381,6 +394,11 @@ export default function AlgorithmPage() {
                     </div>
                 </div>
             </main>
+
+            {/* Quiz Modal */}
+            {showQuiz && quiz && (
+                <QuizModal quiz={quiz} onClose={() => setShowQuiz(false)} />
+            )}
         </>
     );
 }
