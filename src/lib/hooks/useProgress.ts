@@ -39,6 +39,7 @@ export function useProgress(totalAlgorithms: number = 21) {
 
     // Load progress from localStorage
     useEffect(() => {
+        if (typeof window === 'undefined') return;
         const saved = localStorage.getItem(STORAGE_KEYS.PROGRESS);
         if (saved) {
             try {
@@ -52,6 +53,7 @@ export function useProgress(totalAlgorithms: number = 21) {
 
     // Save progress to localStorage
     const saveProgress = useCallback((data: ProgressData) => {
+        if (typeof window === 'undefined') return;
         localStorage.setItem(STORAGE_KEYS.PROGRESS, JSON.stringify(data));
         setProgress(data);
     }, []);
@@ -116,32 +118,12 @@ export function useProgress(totalAlgorithms: number = 21) {
             ? quizScores.reduce((a, b) => a + b, 0) / quizScores.length
             : 0;
 
-        // Calculate streak based on last visit
-        const today = new Date().toDateString();
-        const lastVisit = localStorage.getItem(STORAGE_KEYS.LAST_VISIT);
-        let streak = parseInt(localStorage.getItem(STORAGE_KEYS.STREAK) || '0', 10);
-
-        if (lastVisit !== today) {
-            const yesterday = new Date();
-            yesterday.setDate(yesterday.getDate() - 1);
-            if (lastVisit === yesterday.toDateString()) {
-                // Continue streak
-            } else if (lastVisit !== null) {
-                streak = 0; // Reset streak
-            }
-        }
-
-        if (progress.lastVisited) {
-            localStorage.setItem(STORAGE_KEYS.LAST_VISIT, today);
-            localStorage.setItem(STORAGE_KEYS.STREAK, streak.toString());
-        }
-
         return {
             completedCount,
             totalAlgorithms,
             percentage: totalAlgorithms > 0 ? Math.round((completedCount / totalAlgorithms) * 100) : 0,
             quizAverage: Math.round(quizAverage * 10) / 10,
-            streak,
+            streak: 0,
             bookmarksCount: progress.bookmarks.length,
         };
     }, [progress, totalAlgorithms]);
