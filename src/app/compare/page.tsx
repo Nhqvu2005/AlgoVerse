@@ -157,14 +157,7 @@ export default function ComparePage() {
         const graphType = algo.category === 'graph';
 
         if (arrayType) {
-            return (
-                <ArrayVisualizer
-                    array={currentStep.array || input}
-                    highlightIndices={currentStep.highlight || []}
-                    swapIndices={currentStep.sorted || []}
-                    sortedIndices={currentStep.sorted || []}
-                />
-            );
+            return <ArrayVisualizer step={currentStep} />;
         }
 
         if (graphType && currentStep.graph) {
@@ -177,14 +170,15 @@ export default function ComparePage() {
             );
         }
 
-        return (
-            <ArrayVisualizer
-                array={input}
-                highlightIndices={[]}
-                swapIndices={[]}
-                sortedIndices={[]}
-            />
-        );
+        // For other types, create a step object with the input
+        const defaultStep: AlgorithmStep = {
+            array: input,
+            highlight: [],
+            sorted: [],
+            description: '',
+        };
+
+        return <ArrayVisualizer step={defaultStep} />;
     };
 
     return (
