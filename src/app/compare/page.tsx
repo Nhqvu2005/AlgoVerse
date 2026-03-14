@@ -50,10 +50,10 @@ export default function ComparePage() {
     // Generate steps for selected algorithm
     const generateSteps = useCallback((algoSlug: string, input: number[]) => {
         const algo = algorithms.find(a => a.slug === algoSlug);
-        if (!algo || !algo.visualize) return [];
+        if (!algo || !algo.generateSteps) return [];
 
         try {
-            return algo.visualize([...input]);
+            return algo.generateSteps([...input]);
         } catch (e) {
             console.error('Error generating steps:', e);
             return [];
