@@ -190,9 +190,10 @@ export default function AlgorithmPage() {
                             {quiz && (
                                 <button
                                     onClick={() => setShowQuiz(true)}
-                                    className="px-4 py-2 rounded-lg text-sm font-medium bg-secondary/20 text-secondary border border-secondary/40 hover:bg-secondary/30 transition-all"
+                                    className="px-5 py-2.5 rounded-xl text-sm font-bold bg-gradient-to-r from-secondary to-pink-500 text-white border-0 shadow-glow-pink hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2"
                                 >
-                                    📝 {locale === 'vi' ? 'Làm Quiz' : 'Take Quiz'}
+                                    <span className="text-lg">🎯</span>
+                                    {locale === 'vi' ? 'Làm Quiz' : 'Take Quiz'}
                                 </button>
                             )}
                         </div>
