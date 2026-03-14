@@ -11,7 +11,7 @@ import { algorithms } from '@/lib/algorithmRegistry';
 export default function Navbar() {
     const pathname = usePathname();
     const [mobileOpen, setMobileOpen] = useState(false);
-    const { t, toggleLocale } = useLanguage();
+    const { t, toggleLocale, locale } = useLanguage();
     const { theme, toggleTheme } = useTheme();
     const { stats } = useProgress(algorithms.length);
 
@@ -46,6 +46,12 @@ export default function Navbar() {
                             className="text-sm font-medium text-text-secondary hover:text-white transition-colors duration-200"
                         >
                             {t.nav.algorithms}
+                        </Link>
+                        <Link
+                            href="/compare"
+                            className="text-sm font-medium text-text-secondary hover:text-white transition-colors duration-200"
+                        >
+                            {locale === 'vi' ? 'So sánh' : 'Compare'}
                         </Link>
 
                         {/* Language Toggle */}
@@ -142,6 +148,13 @@ export default function Navbar() {
                                 onClick={() => setMobileOpen(false)}
                             >
                                 {t.nav.algorithms}
+                            </Link>
+                            <Link
+                                href="/compare"
+                                className="px-3 py-2 rounded-lg text-sm font-medium text-text-secondary hover:text-white hover:bg-surface-light transition-all"
+                                onClick={() => setMobileOpen(false)}
+                            >
+                                {locale === 'vi' ? 'So sánh' : 'Compare'}
                             </Link>
                         </div>
                     </div>

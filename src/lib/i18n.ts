@@ -4,6 +4,7 @@ export const translations = {
         nav: {
             home: 'Trang chủ',
             algorithms: 'Thuật toán',
+            compare: 'So sánh',
         },
 
         // Hero
@@ -79,6 +80,7 @@ export const translations = {
         nav: {
             home: 'Home',
             algorithms: 'Algorithms',
+            compare: 'Compare',
         },
 
         // Hero
@@ -153,7 +155,7 @@ export const translations = {
 export type Locale = 'vi' | 'en';
 
 export interface TranslationStrings {
-    nav: { home: string; algorithms: string };
+    nav: { home: string; algorithms: string; compare: string };
     hero: {
         subtitle1: string;
         subtitle2: string;
