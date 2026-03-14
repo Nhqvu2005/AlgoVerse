@@ -161,13 +161,7 @@ export default function ComparePage() {
         }
 
         if (graphType && currentStep.graph) {
-            return (
-                <GraphVisualizer
-                    data={currentStep.graph}
-                    highlightNodes={currentStep.highlight || []}
-                    highlightEdges={currentStep.highlightEdges || []}
-                />
-            );
+            return <GraphVisualizer step={currentStep} />;
         }
 
         // For other types, create a step object with the input
