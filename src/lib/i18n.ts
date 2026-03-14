@@ -16,6 +16,9 @@ export const translations = {
             statAlgorithms: 'thuật toán',
             statCategories: 'danh mục',
             statInteractive: 'tương tác',
+            progress: 'Tiến độ của bạn',
+            completed: 'đã hoàn thành',
+            streak: 'ngày liên tiếp',
         },
 
         // Catalog
@@ -88,6 +91,9 @@ export const translations = {
             statAlgorithms: 'algorithms',
             statCategories: 'categories',
             statInteractive: 'interactive',
+            progress: 'Your Progress',
+            completed: 'completed',
+            streak: 'day streak',
         },
 
         // Catalog
@@ -157,6 +163,9 @@ export interface TranslationStrings {
         statAlgorithms: string;
         statCategories: string;
         statInteractive: string;
+        progress: string;
+        completed: string;
+        streak: string;
     };
     catalog: {
         title: string;

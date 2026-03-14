@@ -17,12 +17,14 @@ import { getAlgorithmBySlug } from '@/lib/algorithmRegistry';
 import { getQuizBySlug } from '@/lib/quiz';
 import { AlgorithmStep, GraphData, categoryConfig } from '@/lib/types';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useProgress } from '@/lib/hooks/useProgress';
 
 export default function AlgorithmPage() {
     const params = useParams();
     const slug = params.slug as string;
     const algo = getAlgorithmBySlug(slug);
     const { t, locale } = useLanguage();
+    const { markCompleted, isCompleted, isBookmarked, toggleBookmark } = useProgress();
 
     const [steps, setSteps] = useState<AlgorithmStep[]>([]);
     const [currentStep, setCurrentStep] = useState(0);
@@ -117,6 +119,13 @@ export default function AlgorithmPage() {
         };
     }, [isPlaying, speed, steps.length]);
 
+    // Mark algorithm as completed when user reaches the end
+    useEffect(() => {
+        if (steps.length > 0 && currentStep === steps.length - 1 && slug) {
+            markCompleted(slug);
+        }
+    }, [currentStep, steps.length, slug, markCompleted]);
+
     if (!algo) {
         return (
             <>
@@ -187,6 +196,18 @@ export default function AlgorithmPage() {
                             <span className={`badge-${catConf.color}`}>
                                 {catConf.icon} {t.categories[algo.category] || catConf.label}
                             </span>
+                            {/* Bookmark Button */}
+                            <button
+                                onClick={() => slug && toggleBookmark(slug)}
+                                className={`p-2.5 rounded-xl border transition-all duration-200 ${
+                                    isBookmarked(slug)
+                                        ? 'bg-warning/20 text-warning border-warning/40'
+                                        : 'bg-surface-light border-white/10 text-text-secondary hover:border-warning/40 hover:text-warning'
+                                }`}
+                                title={isBookmarked(slug) ? 'Remove bookmark' : 'Add bookmark'}
+                            >
+                                {isBookmarked(slug) ? '★' : '☆'}
+                            </button>
                             {quiz && (
                                 <button
                                     onClick={() => setShowQuiz(true)}

@@ -5,12 +5,15 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import { useTheme } from '@/lib/ThemeContext';
+import { useProgress } from '@/lib/hooks/useProgress';
+import { algorithms } from '@/lib/algorithmRegistry';
 
 export default function Navbar() {
     const pathname = usePathname();
     const [mobileOpen, setMobileOpen] = useState(false);
     const { t, toggleLocale } = useLanguage();
     const { theme, toggleTheme } = useTheme();
+    const { stats } = useProgress(algorithms.length);
 
     const isHome = pathname === '/';
 
@@ -66,6 +69,17 @@ export default function Navbar() {
                         >
                             {theme === 'dark' ? '☀️' : '🌙'}
                         </button>
+
+                        {/* Progress Indicator */}
+                        <div className="flex items-center gap-2" title={`${stats.completedCount}/${stats.totalAlgorithms} completed`}>
+                            <div className="w-16 h-1.5 bg-surface-light rounded-full overflow-hidden">
+                                <div
+                                    className="h-full bg-gradient-to-r from-primary to-secondary"
+                                    style={{ width: `${stats.percentage}%` }}
+                                />
+                            </div>
+                            <span className="text-xs text-text-muted">{stats.percentage}%</span>
+                        </div>
 
                         <a
                             href="https://github.com/Nhqvu2005"

@@ -6,6 +6,7 @@ import { algorithms } from '@/lib/algorithmRegistry';
 import { categoryConfig, difficultyConfig } from '@/lib/types';
 import { useState } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useProgress } from '@/lib/hooks/useProgress';
 
 const categories = ['all', 'sorting', 'searching', 'graph', 'data-structure', 'concept'] as const;
 const difficulties = ['all', 'beginner', 'intermediate', 'advanced'] as const;
@@ -15,6 +16,7 @@ export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [activeDifficulty, setActiveDifficulty] = useState<string>('all');
   const { t, locale } = useLanguage();
+  const { stats, isCompleted, isBookmarked, toggleBookmark } = useProgress(algorithms.length);
 
   const filtered = algorithms.filter(algo => {
     const matchSearch = algo.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -78,6 +80,26 @@ export default function HomePage() {
               <span>{t.hero.statInteractive}</span>
             </div>
           </div>
+
+          {/* Progress Indicator */}
+          {stats.completedCount > 0 && (
+            <div className="max-w-md mx-auto mt-8 p-4 glass rounded-xl">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm text-text-secondary">Your Progress</span>
+                <span className="text-sm font-bold text-primary-light">{stats.percentage}%</span>
+              </div>
+              <div className="h-2 bg-surface-light rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-500"
+                  style={{ width: `${stats.percentage}%` }}
+                />
+              </div>
+              <div className="flex items-center justify-between mt-2 text-xs text-text-muted">
+                <span>{stats.completedCount}/{stats.totalAlgorithms} completed</span>
+                <span>🔥 {stats.streak} day streak</span>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -158,9 +180,16 @@ export default function HomePage() {
                 <Link
                   key={algo.slug}
                   href={`/algorithms/${algo.slug}`}
-                  className="card-interactive group"
+                  className="card-interactive group relative"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
+                  {/* Completion Badge */}
+                  {isCompleted(algo.slug) && (
+                    <div className="absolute top-3 right-3">
+                      <span className="text-lg" title="Completed">✅</span>
+                    </div>
+                  )}
+
                   <div className="flex items-start gap-3 mb-3">
                     <span className="text-2xl">{algo.icon}</span>
                     <div className="flex-1 min-w-0">
