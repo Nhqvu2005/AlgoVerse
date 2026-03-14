@@ -24,7 +24,7 @@ export default function AlgorithmPage() {
     const slug = params.slug as string;
     const algo = getAlgorithmBySlug(slug);
     const { t, locale } = useLanguage();
-    const { markCompleted, isBookmarked, toggleBookmark, saveQuizScore, isCompleted } = useProgress();
+    const { markCompleted, isBookmarked, toggleBookmark, saveQuizScore } = useProgress();
 
     const [steps, setSteps] = useState<AlgorithmStep[]>([]);
     const [currentStep, setCurrentStep] = useState(0);
