@@ -81,6 +81,7 @@ export const conditionals: AlgorithmInfo = {
     descriptionEn: 'Conditionals allow the program to execute different actions based on boolean conditions.',
     category: 'concept',
     categoryVi: 'Cơ bản',
+    difficulty: 'beginner',
     timeComplexity: { best: 'O(1)', average: 'O(1)', worst: 'O(1)' },
     spaceComplexity: 'O(1)',
     code,

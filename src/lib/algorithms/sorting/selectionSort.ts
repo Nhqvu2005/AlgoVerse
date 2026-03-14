@@ -6,6 +6,7 @@ export const selectionSort: AlgorithmInfo = {
     nameVi: 'Sắp xếp Chọn',
     category: 'sorting',
     categoryVi: 'Sắp xếp',
+    difficulty: 'beginner',
     description: 'Tìm phần tử nhỏ nhất trong phần chưa sắp xếp và đặt nó vào đầu. Lặp lại cho đến khi toàn bộ mảng được sắp xếp.',
     descriptionEn: 'Finds the smallest element in the unsorted part and places it at the beginning. Repeats until the entire array is sorted.',
     timeComplexity: { best: 'O(n²)', average: 'O(n²)', worst: 'O(n²)' },

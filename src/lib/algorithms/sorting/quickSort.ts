@@ -6,6 +6,7 @@ export const quickSort: AlgorithmInfo = {
     nameVi: 'Sắp xếp Nhanh',
     category: 'sorting',
     categoryVi: 'Sắp xếp',
+    difficulty: 'intermediate',
     description: 'Chọn một phần tử làm pivot, phân hoạch mảng sao cho phần tử nhỏ hơn pivot ở bên trái, lớn hơn ở bên phải. Đệ quy sắp xếp hai phần.',
     descriptionEn: 'Picks a pivot element, partitions the array so smaller elements go left and larger go right. Recursively sorts both partitions.',
     timeComplexity: { best: 'O(n log n)', average: 'O(n log n)', worst: 'O(n²)' },

@@ -6,6 +6,7 @@ export const mergeSort: AlgorithmInfo = {
     nameVi: 'Sắp xếp Trộn',
     category: 'sorting',
     categoryVi: 'Sắp xếp',
+    difficulty: 'intermediate',
     description: 'Chia mảng thành hai nửa, sắp xếp đệ quy từng nửa, rồi trộn hai nửa đã sắp xếp lại. Thuật toán Chia để Trị (Divide and Conquer) kinh điển.',
     descriptionEn: 'Divides the array into two halves, recursively sorts each half, then merges the two sorted halves. A classic Divide and Conquer algorithm.',
     timeComplexity: { best: 'O(n log n)', average: 'O(n log n)', worst: 'O(n log n)' },

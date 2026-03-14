@@ -186,6 +186,7 @@ export const heap: AlgorithmInfo = {
     descriptionEn: 'Min Heap is a complete binary tree where every parent node is smaller than or equal to its children.',
     category: 'data-structure',
     categoryVi: 'Cấu trúc DL',
+    difficulty: 'intermediate',
     timeComplexity: { best: 'O(1)', average: 'O(log n)', worst: 'O(log n)' },
     spaceComplexity: 'O(n)',
     code,

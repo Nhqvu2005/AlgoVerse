@@ -6,6 +6,7 @@ export const queue: AlgorithmInfo = {
     nameVi: 'Hàng đợi',
     category: 'data-structure',
     categoryVi: 'Cấu trúc dữ liệu',
+    difficulty: 'beginner',
     description: 'Cấu trúc dữ liệu FIFO (First In, First Out). Phần tử được thêm vào cuối và lấy ra từ đầu. Giống như hàng đợi mua vé.',
     descriptionEn: 'FIFO (First In, First Out) data structure. Elements are added at the rear and removed from the front. Like a ticket queue.',
     timeComplexity: { best: 'O(1)', average: 'O(1)', worst: 'O(1)' },

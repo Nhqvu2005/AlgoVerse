@@ -90,6 +90,7 @@ export const dijkstra: AlgorithmInfo = {
     descriptionEn: 'Dijkstra\'s algorithm finds the shortest path from a source node to all other nodes in a graph with non-negative edge weights.',
     category: 'graph',
     categoryVi: 'Đồ thị',
+    difficulty: 'advanced',
     timeComplexity: { best: 'O(E log V)', average: 'O(E log V)', worst: 'O(E log V)' },
     spaceComplexity: 'O(V + E)',
     code,

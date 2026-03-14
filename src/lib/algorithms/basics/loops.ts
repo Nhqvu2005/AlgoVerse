@@ -70,6 +70,7 @@ export const loops: AlgorithmInfo = {
     descriptionEn: 'Loops allow executing a block of code multiple times. For loops are used when the number of iterations is known, While loops are condition-based.',
     category: 'concept',
     categoryVi: 'Cơ bản',
+    difficulty: 'beginner',
     timeComplexity: { best: 'O(n)', average: 'O(n)', worst: 'O(n)' },
     spaceComplexity: 'O(1)',
     code,

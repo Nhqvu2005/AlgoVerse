@@ -3,22 +3,25 @@
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
 import { algorithms } from '@/lib/algorithmRegistry';
-import { categoryConfig } from '@/lib/types';
+import { categoryConfig, difficultyConfig } from '@/lib/types';
 import { useState } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 
-const categories = ['all', 'sorting', 'searching', 'graph', 'data-structure'] as const;
+const categories = ['all', 'sorting', 'searching', 'graph', 'data-structure', 'concept'] as const;
+const difficulties = ['all', 'beginner', 'intermediate', 'advanced'] as const;
 
 export default function HomePage() {
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [activeDifficulty, setActiveDifficulty] = useState<string>('all');
   const { t, locale } = useLanguage();
 
   const filtered = algorithms.filter(algo => {
     const matchSearch = algo.name.toLowerCase().includes(search.toLowerCase()) ||
       algo.nameVi.toLowerCase().includes(search.toLowerCase());
     const matchCategory = activeCategory === 'all' || algo.category === activeCategory;
-    return matchSearch && matchCategory;
+    const matchDifficulty = activeDifficulty === 'all' || algo.difficulty === activeDifficulty;
+    return matchSearch && matchCategory && matchDifficulty;
   });
 
   return (
@@ -103,7 +106,7 @@ export default function HomePage() {
           </div>
 
           {/* Category Filter */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-4">
             {categories.map(cat => {
               const catKey = cat as string;
               return (
@@ -119,6 +122,27 @@ export default function HomePage() {
                     ? `🌐 ${t.catalog.allCategories}`
                     : `${categoryConfig[cat as keyof typeof categoryConfig].icon} ${t.categories[catKey] || categoryConfig[cat as keyof typeof categoryConfig].label}`
                   }
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Difficulty Filter */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
+            {difficulties.map(diff => {
+              const diffConf = difficultyConfig[diff as keyof typeof difficultyConfig];
+              return (
+                <button
+                  key={diff}
+                  onClick={() => setActiveDifficulty(diff)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 ${activeDifficulty === diff
+                    ? diff === 'beginner' ? 'bg-success/20 text-success border border-success/40'
+                      : diff === 'intermediate' ? 'bg-warning/20 text-warning border border-warning/40'
+                      : 'bg-danger/20 text-danger border border-danger/40'
+                    : 'bg-surface/50 text-text-secondary border border-white/5 hover:border-white/20 hover:text-white'
+                    }`}
+                >
+                  {diff === 'all' ? '🎯 Tất cả cấp độ' : `${diffConf.icon} ${locale === 'vi' ? diffConf.label : diffConf.labelEn}`}
                 </button>
               );
             })}
@@ -152,9 +176,18 @@ export default function HomePage() {
                   </p>
 
                   <div className="flex items-center justify-between">
-                    <span className={badgeClass}>
-                      {catConf.icon} {t.categories[algo.category] || catConf.label}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className={badgeClass}>
+                        {catConf.icon} {t.categories[algo.category] || catConf.label}
+                      </span>
+                      <span className={`text-xs px-2 py-0.5 rounded-full ${
+                        algo.difficulty === 'beginner' ? 'bg-success/20 text-success' :
+                        algo.difficulty === 'intermediate' ? 'bg-warning/20 text-warning' :
+                        'bg-danger/20 text-danger'
+                      }`}>
+                        {difficultyConfig[algo.difficulty].icon} {locale === 'vi' ? difficultyConfig[algo.difficulty].label : difficultyConfig[algo.difficulty].labelEn}
+                      </span>
+                    </div>
                     <span className="text-xs text-text-muted font-mono">{algo.timeComplexity.average}</span>
                   </div>
                 </Link>

@@ -89,6 +89,8 @@ export interface AlgorithmGuide {
     explanationEn: string;
 }
 
+export type DifficultyLevel = 'beginner' | 'intermediate' | 'advanced';
+
 export type InputType = 'array' | 'array-target' | 'graph' | 'none';
 
 export interface AlgorithmInfo {
@@ -97,6 +99,7 @@ export interface AlgorithmInfo {
     nameVi: string;
     category: 'sorting' | 'searching' | 'graph' | 'data-structure' | 'concept';
     categoryVi: string;
+    difficulty: DifficultyLevel;
     description: string;
     descriptionEn?: string;
     timeComplexity: { best: string; average: string; worst: string };
@@ -118,4 +121,10 @@ export const categoryConfig = {
     graph: { label: 'Đồ thị', color: 'cyan', icon: '🕸️' },
     'data-structure': { label: 'Cấu trúc DL', color: 'green', icon: '📦' },
     concept: { label: 'Cơ bản', color: 'orange', icon: '💡' },
+} as const;
+
+export const difficultyConfig = {
+    beginner: { label: 'Người mới', labelEn: 'Beginner', color: 'green', icon: '🌱' },
+    intermediate: { label: 'Trung cấp', labelEn: 'Intermediate', color: 'yellow', icon: '🌿' },
+    advanced: { label: 'Nâng cao', labelEn: 'Advanced', color: 'red', icon: '🌳' },
 } as const;

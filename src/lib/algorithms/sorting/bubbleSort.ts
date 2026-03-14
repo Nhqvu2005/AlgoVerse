@@ -6,6 +6,7 @@ export const bubbleSort: AlgorithmInfo = {
     nameVi: 'Sắp xếp Nổi bọt',
     category: 'sorting',
     categoryVi: 'Sắp xếp',
+    difficulty: 'beginner',
     description: 'So sánh các phần tử liền kề và hoán đổi nếu chúng sai thứ tự. Quá trình lặp lại cho đến khi mảng được sắp xếp. Phần tử lớn nhất sẽ "nổi" lên cuối mảng sau mỗi lượt.',
     descriptionEn: 'Compares adjacent elements and swaps them if they are in the wrong order. This process repeats until the array is sorted. The largest element "bubbles" to the end after each pass.',
     timeComplexity: { best: 'O(n)', average: 'O(n²)', worst: 'O(n²)' },

@@ -85,6 +85,7 @@ export const avlTree: AlgorithmInfo = {
     descriptionEn: 'AVL Tree is a self-balancing Binary Search Tree. The heights of the two child subtrees of any node differ by at most one.',
     category: 'data-structure',
     categoryVi: 'Cấu trúc DL',
+    difficulty: 'advanced',
     timeComplexity: { best: 'O(log n)', average: 'O(log n)', worst: 'O(log n)' },
     spaceComplexity: 'O(n)',
     code,

@@ -23,6 +23,7 @@ export const dfs: AlgorithmInfo = {
     nameVi: 'Tìm kiếm theo Chiều sâu',
     category: 'graph',
     categoryVi: 'Đồ thị',
+    difficulty: 'intermediate',
     description: 'Duyệt đồ thị bằng cách đi sâu nhất có thể trước khi quay lui. Sử dụng ngăn xếp (Stack) hoặc đệ quy để quản lý thứ tự duyệt.',
     descriptionEn: 'Traverses a graph by going as deep as possible before backtracking. Uses a Stack or recursion to manage traversal order.',
     timeComplexity: { best: 'O(V + E)', average: 'O(V + E)', worst: 'O(V + E)' },

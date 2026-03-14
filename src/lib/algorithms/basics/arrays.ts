@@ -83,6 +83,7 @@ export const arrays: AlgorithmInfo = {
     descriptionEn: 'An Array is a collection of elements stored at contiguous memory locations. Accessing elements by index is very fast (O(1)).',
     category: 'concept',
     categoryVi: 'Cơ bản',
+    difficulty: 'beginner',
     timeComplexity: { best: 'O(1)', average: 'O(n)', worst: 'O(n)' },
     spaceComplexity: 'O(n)',
     code,

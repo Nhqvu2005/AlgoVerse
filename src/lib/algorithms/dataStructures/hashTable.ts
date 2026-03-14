@@ -108,6 +108,7 @@ export const hashTable: AlgorithmInfo = {
     descriptionEn: 'Hash Table stores data as key-value pairs using a hash function (e.g., Modulo). Checking for collisions (keys mapping to same index), handled via Chaining (Linked Lists) or Open Addressing.',
     category: 'data-structure',
     categoryVi: 'Cấu trúc DL',
+    difficulty: 'intermediate',
     timeComplexity: { best: 'O(1)', average: 'O(1)', worst: 'O(n)' },
     spaceComplexity: 'O(n)',
     code,

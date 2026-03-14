@@ -6,6 +6,7 @@ export const linkedList: AlgorithmInfo = {
   nameVi: 'Danh sách Liên kết',
   category: 'data-structure',
   categoryVi: 'Cấu trúc dữ liệu',
+  difficulty: 'intermediate',
   description: 'Cấu trúc dữ liệu tuyến tính với các node liên kết nhau qua con trỏ. Mỗi node chứa dữ liệu và tham chiếu đến node tiếp theo.',
   descriptionEn: 'A linear data structure with nodes linked via pointers. Each node contains data and a reference to the next node.',
   timeComplexity: { best: 'O(1)', average: 'O(n)', worst: 'O(n)' },

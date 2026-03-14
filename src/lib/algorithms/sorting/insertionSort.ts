@@ -6,6 +6,7 @@ export const insertionSort: AlgorithmInfo = {
     nameVi: 'Sắp xếp Chèn',
     category: 'sorting',
     categoryVi: 'Sắp xếp',
+    difficulty: 'beginner',
     description: 'Xây dựng mảng đã sắp xếp từng phần tử một, bằng cách chèn mỗi phần tử vào đúng vị trí trong phần đã sắp xếp. Giống như cách sắp xếp bài trên tay.',
     descriptionEn: 'Builds the sorted array one element at a time by inserting each element into its correct position in the sorted portion. Like sorting cards in your hand.',
     timeComplexity: { best: 'O(n)', average: 'O(n²)', worst: 'O(n²)' },

@@ -107,6 +107,7 @@ export const prim: AlgorithmInfo = {
     descriptionEn: 'Prim\'s algorithm finds the Minimum Spanning Tree (MST) for a weighted undirected graph.',
     category: 'graph',
     categoryVi: 'Đồ thị',
+    difficulty: 'advanced',
     timeComplexity: { best: 'O(E log V)', average: 'O(E log V)', worst: 'O(E log V)' },
     spaceComplexity: 'O(V + E)',
     code,

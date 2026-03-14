@@ -25,6 +25,7 @@ export const binaryTree: AlgorithmInfo = {
     nameVi: 'Cây Nhị phân Tìm kiếm',
     category: 'data-structure',
     categoryVi: 'Cấu trúc dữ liệu',
+    difficulty: 'intermediate',
     description: 'Cây nhị phân đặc biệt: mỗi node trái nhỏ hơn node cha, node phải lớn hơn. Cho phép tìm kiếm, chèn, xóa hiệu quả O(log n) trung bình.',
     descriptionEn: 'A special binary tree: each left child is smaller, each right child is larger than the parent. Enables efficient O(log n) search, insert, and delete on average.',
     timeComplexity: { best: 'O(log n)', average: 'O(log n)', worst: 'O(n)' },

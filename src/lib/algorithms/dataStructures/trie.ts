@@ -126,6 +126,7 @@ export const trie: AlgorithmInfo = {
     descriptionEn: 'Trie is a tree data structure used for storing strings, enabling fast prefix-based search.',
     category: 'data-structure',
     categoryVi: 'Cấu trúc DL',
+    difficulty: 'advanced',
     timeComplexity: { best: 'O(L)', average: 'O(L)', worst: 'O(L)' },
     spaceComplexity: 'O(N * L)',
     code,

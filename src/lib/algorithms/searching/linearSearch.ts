@@ -6,6 +6,7 @@ export const linearSearch: AlgorithmInfo = {
     nameVi: 'Tìm kiếm Tuyến tính',
     category: 'searching',
     categoryVi: 'Tìm kiếm',
+    difficulty: 'beginner',
     description: 'Duyệt qua từng phần tử trong mảng từ đầu đến cuối để tìm giá trị mục tiêu. Đơn giản nhưng không hiệu quả cho mảng lớn.',
     descriptionEn: 'Scans each element from start to end to find the target value. Simple but inefficient for large arrays.',
     timeComplexity: { best: 'O(1)', average: 'O(n)', worst: 'O(n)' },

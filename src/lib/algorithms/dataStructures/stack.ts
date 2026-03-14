@@ -6,6 +6,7 @@ export const stack: AlgorithmInfo = {
     nameVi: 'Ngăn xếp',
     category: 'data-structure',
     categoryVi: 'Cấu trúc dữ liệu',
+    difficulty: 'beginner',
     description: 'Cấu trúc dữ liệu LIFO (Last In, First Out). Phần tử được thêm và lấy ra từ cùng một đầu (đỉnh). Giống như chồng đĩa.',
     descriptionEn: 'LIFO (Last In, First Out) data structure. Elements are added and removed from the same end (top). Like a stack of plates.',
     timeComplexity: { best: 'O(1)', average: 'O(1)', worst: 'O(1)' },

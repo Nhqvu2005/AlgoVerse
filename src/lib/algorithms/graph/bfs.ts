@@ -23,6 +23,7 @@ export const bfs: AlgorithmInfo = {
     nameVi: 'Tìm kiếm theo Chiều rộng',
     category: 'graph',
     categoryVi: 'Đồ thị',
+    difficulty: 'intermediate',
     description: 'Duyệt đồ thị theo từng tầng, bắt đầu từ nút gốc. Sử dụng hàng đợi (Queue) để quản lý thứ tự duyệt. Đảm bảo tìm đường ngắn nhất trong đồ thị không trọng số.',
     descriptionEn: 'Traverses a graph level by level, starting from the root node. Uses a Queue to manage traversal order. Guarantees shortest path in unweighted graphs.',
     timeComplexity: { best: 'O(V + E)', average: 'O(V + E)', worst: 'O(V + E)' },

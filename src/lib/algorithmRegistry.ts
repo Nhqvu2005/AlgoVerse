@@ -35,7 +35,6 @@ export const algorithms: AlgorithmInfo[] = [
     stack,
     queue,
     linkedList,
-    linkedList,
     binaryTree,
     arrays,
     loops,
