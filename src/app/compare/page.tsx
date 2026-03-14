@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import ArrayVisualizer from '@/components/visualizers/ArrayVisualizer';
 import GraphVisualizer from '@/components/visualizers/GraphVisualizer';
-import DataStructureVisualizer from '@/components/visualizers/DataStructureVisualizer';
 import { algorithms } from '@/lib/algorithmRegistry';
 import { categoryConfig, AlgorithmStep } from '@/lib/types';
 import { useLanguage } from '@/lib/LanguageContext';
@@ -24,7 +23,7 @@ interface ComparisonState {
 }
 
 export default function ComparePage() {
-    const { t, locale } = useLanguage();
+    const { locale } = useLanguage();
     const [selectedCategory, setSelectedCategory] = useState('sorting');
     const [selectedAlgo1, setSelectedAlgo1] = useState('');
     const [selectedAlgo2, setSelectedAlgo2] = useState('');
